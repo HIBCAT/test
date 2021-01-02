@@ -16,13 +16,20 @@
     </style>
   </head>
   <body>
-    <h1>Template for Embedding Vega-Lite Visualization</h1>
-    <!-- Container for the visualization -->
-    <div id="vis"></div>
+    <h1>Test Visualizations Present in Main Dashboard</h1>
+    <!-- Container for the visualization 1 -->
+    <div id="vis1">1. Activity Volume Over Last Two Years
+    <p>Coloured line represents the median of the whole data. Click and scrub inside the graph to select custom data area; it will show the new median.</p>
+    </div>
+    
+    <!-- Container for the visualization 2 -->
+    <div id="vis2">1. Activity Time Volume Over Last Two Years
+    <p>Coloured line represents the median of the whole data. Click and scrub inside the graph to select custom data area; it will show the new median.</p>
+    </div>
 
     <script>
       // Assign the specification to a local variable vlSpec.
-      var vlSpec = {
+      var vlSpec1 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/activity_day.csv"},
   "width" : 300,
@@ -75,9 +82,68 @@
   }]
 }
 ;
+      
+      var vlSpec2 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/activity_time.csv"},
+  "width" : 350,
+  "height" : 350,
+  "layer": [{
+    "selection": {
+      "brush": {
+        "type": "interval",
+        "encodings": ["x"]
+      }
+    },
+    "mark": {"type":"bar", "tooltip": true},
+    "encoding": {
+      "x": {
+        "field": "hourOfDay",
+        "type": "ordinal",
+        "title": "Time"
+
+      },
+      "y": {
+        "aggregate": "median",
+        "field": "time_vol",
+        "type": "quantitative",
+        "title": "Volume"
+      },
+      "color": {
+      "field": "time_vol", "type": "nominal",
+      "scale": {"range": ["#E84A27"]},
+      "legend":null
+    },
+      "opacity": {
+        "condition": {
+          "selection": "brush", "value": 1
+        },
+        "value": 0.7
+      }
+    }
+  }, {
+    "transform": [{
+      "filter": {"selection": "brush"}
+    }],
+    "mark": {"type": "rule", "tooltip": true},
+    "encoding": {
+      "y": {
+        "aggregate": "mean",
+        "field": "time_vol",
+        "type": "quantitative",
+        "axis" : {"format" : "s"}
+
+      },
+      "color": {"value": "#1F4096"},
+      "size": {"value": 3}
+    }
+  }]
+}
+;
 
       // Embed the visualization in the container with id `vis`
-      vegaEmbed('#vis', vlSpec);
+      vegaEmbed('#vis1', vlSpec1);
+      vegaEmbed('#vis2', vlSpec2);
     </script>
   </body>
 </html>
