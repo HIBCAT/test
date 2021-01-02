@@ -21,6 +21,7 @@
     <div id="vis1"></div>
     <div id="vis2"></div>
     <div id="vis3"></div>
+    <div id="vis4"></div>
 
     <script>
       // Assign the specification to a local variable vlSpec.
@@ -36,7 +37,7 @@
         "encodings": ["x"]
       }
     },
-    "mark": "bar",
+    "mark": {"type":"bar", "tooltip": true},
     "encoding": {
       "x": {
         "timeUnit": "day",
@@ -193,12 +194,309 @@
   }]
 }
 ;
+      var vlSpec4 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "Visuals Three to Eight",
+  "data": {
+    "url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/visual_3to8_melted.csv"
+  },
+  "vconcat": [
+    {
+      "transform": [{"filter": "datum.variable == 'volume'"}],
+      "width": 1100,
+      "height": 100,
+      "mark": {"type": "area", "tooltip": true},
+      "selection": {"brush": {"type": "interval", "encodings": ["x"]}},
+      "encoding": {
+        "x": {"field": "days", "type": "temporal"},
+        "y": {
+          "field": "value",
+          "title":"Total Post Volume",
+          "type": "quantitative",
+          "axis": {"tickCount": 5, "grid": true, "format": "s"}
+        }
+      }
+    },
+    {
+      "width": 1100,
+      "height": 200,
+      "transform": [
+        {
+          "filter": {
+            "field": "variable",
+            "oneOf": ["positive", "neutral", "negative"]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "days",
+          "type": "temporal",
+          "scale": {"domain": {"selection": "brush"}}
+        }
+      },
+      "layer": [
+        {
+          "encoding": {
+            "color": {"field": "variable", "type": "nominal", "title": "Legend"},
+            "y": {
+              "field": "value",
+              "title": "Sentiment Wise Post Volume",
+              "type": "quantitative",
+              "axis": {"tickCount": 5, "grid": true, "format": "s"}
+            }
+          },
+          "layer": [
+            {"mark": "line"},
+            {"transform": [{"filter": {"selection": "hover"}}], "mark": "point"}
+          ]
+        },
+        {
+          "transform": [
+            {"pivot": "variable", "value": "value", "groupby": ["days"]}
+          ],
+          "mark": "rule",
+          "encoding": {
+            "opacity": {
+              "condition": {"value": 0.3, "selection": "hover"},
+              "value": 0
+            },
+            "tooltip": [
+              {"field": "negative", "type": "quantitative"},
+              {"field": "neutral", "type": "quantitative"},
+              {"field": "positive", "type": "quantitative"}
+            ]
+          },
+          "selection": {
+            "hover": {
+              "type": "single",
+              "fields": ["days"],
+              "nearest": true,
+              "on": "mouseover",
+              "empty": "none",
+              "clear": "mouseout"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 1100,
+      "height": 200,
+      "transform": [
+        {"filter": {"field": "variable", "oneOf": ["net_sent_vol"]}}
+      ],
+      "encoding": {
+        "x": {
+          "field": "days",
+          "type": "temporal",
+          "scale": {"domain": {"selection": "brush"}}
+        }
+      },
+      "layer": [
+        {
+          "encoding": {
+            "color": {"field": "variable", "type": "nominal"},
+            "y": {
+              "field": "value",
+              "title": "Net Sentiment ( -5 to +5 )",
+              "type": "quantitative",
+              "axis": {"tickCount": 5, "grid": true, "format": "s"}
+            }
+          },
+          "layer": [
+            {"mark": "line"},
+            {"transform": [{"filter": {"selection": "hover"}}], "mark": "point"}
+          ]
+        },
+        {
+          "transform": [
+            {"pivot": "variable", "value": "value", "groupby": ["days"]}
+          ],
+          "mark": "rule",
+          "encoding": {
+            "opacity": {
+              "condition": {"value": 0.3, "selection": "hover"},
+              "value": 0
+            },
+            "tooltip": [{"field": "net_sent_vol", "type": "quantitative"}]
+          },
+          "selection": {
+            "hover": {
+              "type": "single",
+              "fields": ["days"],
+              "nearest": true,
+              "on": "mouseover",
+              "empty": "none",
+              "clear": "mouseout"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 1100,
+      "height": 200,
+      "transform": [
+        {"filter": {"field": "variable", "oneOf": ["male", "female"]}}
+      ],
+      "encoding": {
+        "x": {
+          "field": "days",
+          "type": "temporal",
+          "scale": {"domain": {"selection": "brush"}}
+        }
+      },
+      "layer": [
+        {
+          "encoding": {
+            "color": {"field": "variable", "type": "nominal"},
+            "y": {
+              "field": "value",
+              "title": "Gender Wise Volume",
+              "type": "quantitative",
+              "axis": {"tickCount": 5, "grid": true, "format": "s"}
+            }
+          },
+          "layer": [
+            {"mark": "line"},
+            {"transform": [{"filter": {"selection": "hover"}}], "mark": "point"}
+          ]
+        },
+        {
+          "transform": [
+            {"pivot": "variable", "value": "value", "groupby": ["days"]}
+          ],
+          "mark": "rule",
+          "encoding": {
+            "opacity": {
+              "condition": {"value": 0.3, "selection": "hover"},
+              "value": 0
+            },
+            "tooltip": [
+              {"field": "male", "type": "quantitative"},
+              {"field": "female", "type": "quantitative"}
+            ]
+          },
+          "selection": {
+            "hover": {
+              "type": "single",
+              "fields": ["days"],
+              "nearest": true,
+              "on": "mouseover",
+              "empty": "none",
+              "clear": "mouseout"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 1100,
+      "height": 200,
+      "transform": [
+        {
+          "filter": {
+            "field": "variable",
+            "oneOf": [
+              "Dark Web",
+              "YouTube",
+              "QQ",
+              "News",
+              "Facebook",
+              "Tumblr",
+              "Legacy Instagram",
+              "LinkedIn",
+              "Instagram",
+              "Blogs",
+              "Forums",
+              "Twitter",
+              "VK",
+              "Review",
+              "Sina Weibo",
+              "Reddit",
+              "4Chan",
+              "LexisNexis Licensed News"
+            ]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "days",
+          "type": "temporal",
+          "scale": {"domain": {"selection": "brush"}}
+        }
+      },
+      "layer": [
+        {
+          "encoding": {
+            "color": {"field": "variable", "type": "nominal"},
+            "y": {
+              "field": "value",
+              "title": "Post Volume By Source",
+              "type": "quantitative",
+              "axis": {"tickCount": 5, "grid": true, "format": "s"}
+            }
+          },
+          "layer": [
+            {"mark": "line"},
+            {"transform": [{"filter": {"selection": "hover"}}], "mark": "point"}
+          ]
+        },
+        {
+          "transform": [
+            {"pivot": "variable", "value": "value", "groupby": ["days"]}
+          ],
+          "mark": "rule",
+          "encoding": {
+            "opacity": {
+              "condition": {"value": 0.3, "selection": "hover"},
+              "value": 0
+            },
+            "tooltip": [
+              {"field": "Dark Web", "type": "quantitative"},
+              {"field": "YouTube", "type": "quantitative"},
+              {"field": "QQ", "type": "quantitative"},
+              {"field": "News", "type": "quantitative"},
+              {"field": "Facebook", "type": "quantitative"},
+              {"field": "Tumblr", "type": "quantitative"},
+              {"field": "Legacy Instagram", "type": "quantitative"},
+              {"field": "LinkedIn", "type": "quantitative"},
+              {"field": "Instagram", "type": "quantitative"},
+              {"field": "Blogs", "type": "quantitative"},
+              {"field": "Forums", "type": "quantitative"},
+              {"field": "Twitter", "type": "quantitative"},
+              {"field": "VK", "type": "quantitative"},
+              {"field": "Review", "type": "quantitative"},
+              {"field": "Sina Weibo", "type": "quantitative"},
+              {"field": "Reddit", "type": "quantitative"},
+              {"field": "4Chan", "type": "quantitative"},
+              {"field": "LexisNexis Licensed News", "type": "quantitative"}
+            ]
+          },
+          "selection": {
+            "hover": {
+              "type": "single",
+              "fields": ["days"],
+              "nearest": true,
+              "on": "mouseover",
+              "empty": "none",
+              "clear": "mouseout"
+            }
+          }
+        }
+      ]
+    }
+  ]
+};
       
 
       // Embed the visualization in the container with id `vis`
       vegaEmbed('#vis1', vlSpec1);
       vegaEmbed('#vis2', vlSpec2);
       vegaEmbed('#vis3', vlSpec3);
+      vegaEmbed('#vis4', vlSpec4);
     </script>
   </body>
 </html>
