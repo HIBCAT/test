@@ -16,17 +16,18 @@
     </style>
   </head>
   <body>
-    <h1>Test Visualizations Present in Main Dashboard</h1>
-    
+    <h1>Template for Embedding Vega-Lite Visualization</h1>
+    <!-- Container for the visualization -->
     <div id="vis1"></div>
     <div id="vis2"></div>
+    <div id="vis3"></div>
 
     <script>
       // Assign the specification to a local variable vlSpec.
       var vlSpec1 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/activity_day.csv"},
-  "width" : 300,
+  "width": 350,
   "height" : 350,
   "layer": [{
     "selection": {
@@ -35,25 +36,20 @@
         "encodings": ["x"]
       }
     },
-    "mark": {"type":"bar", "tooltip": true},
+    "mark": "bar",
     "encoding": {
       "x": {
         "timeUnit": "day",
         "field": "dayOfWeek",
         "type": "ordinal",
         "title": "Day"
-
       },
       "y": {
-        "aggregate": "median",
         "field": "day_vol",
         "type": "quantitative",
         "title": "Volume"
       },
-      "color": {
-      "field": "day_vol", "type": "nominal",
-      "scale": {"range": ["#E8E9EA"]},
-      "legend":null,
+      "color": {"value": "#A5A8AA"},
       "opacity": {
         "condition": {
           "selection": "brush", "value": 1
@@ -65,14 +61,12 @@
     "transform": [{
       "filter": {"selection": "brush"}
     }],
-    "mark": {"type": "rule", "tooltip": true},
+    "mark": "rule",
     "encoding": {
       "y": {
         "aggregate": "mean",
         "field": "day_vol",
-        "type": "quantitative",
-        "axis" : {"format" : "s"}
-
+        "type": "quantitative"
       },
       "color": {"value": "firebrick"},
       "size": {"value": 3}
@@ -81,34 +75,94 @@
 }
 ;
       
+      
       var vlSpec2 = {
+   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+   "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/activity_time.csv"},
+   "width" : 350,
+   "height" : 350,
+   "layer": [{
+     "selection": {
+       "brush": {
+         "type": "interval",
+         "encodings": ["y"]
+       }
+     },
+     "mark": {"type":"bar", "tooltip": true},
+     "encoding": {
+       "y": {
+         "field": "hourOfDay",
+         "type": "ordinal",
+         "title": "Time"
+
+       },
+       "x": {
+         "aggregate": "median",
+         "field": "time_vol",
+         "type": "quantitative",
+         "title": "Volume"
+       },
+       "color": {
+       "field": "time_vol", "type": "nominal",
+       "scale": {"range": ["#E84A27"]},
+       "legend":null
+     },
+       "opacity": {
+         "condition": {
+           "selection": "brush", "value": 1
+         },
+         "value": 0.7
+       }
+     }
+   }, {
+     "transform": [{
+       "filter": {"selection": "brush"}
+     }],
+     "mark": {"type": "rule", "tooltip": true},
+     "encoding": {
+       "x": {
+         "aggregate": "mean",
+         "field": "time_vol",
+         "type": "quantitative",
+         "axis" : {"format" : "s"}
+
+       },
+       "color": {"value": "#1F4096"},
+       "size": {"value": 3}
+     }
+   }]
+ };
+      
+      
+      var vlSpec3 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/activity_time.csv"},
+  "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/geography.csv"},
+  "transform": [{"filter": "datum.geo_vol > 50000"}],
+
   "width" : 350,
-  "height" : 350,
   "layer": [{
     "selection": {
       "brush": {
         "type": "interval",
-        "encodings": ["x"]
+        "encodings": ["y"]
       }
     },
     "mark": {"type":"bar", "tooltip": true},
     "encoding": {
-      "x": {
-        "field": "hourOfDay",
-        "type": "ordinal",
-        "title": "Time"
-
-      },
       "y": {
+        "field": "countries",
+        "type": "nominal",
+        "title": "Countries",
+        "sort": "-x"
+      },
+      "x": {
         "aggregate": "median",
-        "field": "time_vol",
+        "field": "geo_vol",
         "type": "quantitative",
         "title": "Volume"
       },
       "color": {
-      "field": "time_vol", "type": "nominal",
+      "field": "geo_vol", "type": "nominal",
       "scale": {"range": ["#E84A27"]},
       "legend":null
     },
@@ -119,18 +173,19 @@
         "value": 0.7
       }
     }
-  }, {
+  }, 
+  
+  {
     "transform": [{
       "filter": {"selection": "brush"}
     }],
     "mark": {"type": "rule", "tooltip": true},
     "encoding": {
-      "y": {
+      "x": {
         "aggregate": "mean",
-        "field": "time_vol",
+        "field": "geo_vol",
         "type": "quantitative",
         "axis" : {"format" : "s"}
-
       },
       "color": {"value": "#1F4096"},
       "size": {"value": 3}
@@ -138,10 +193,12 @@
   }]
 }
 ;
+      
 
       // Embed the visualization in the container with id `vis`
       vegaEmbed('#vis1', vlSpec1);
       vegaEmbed('#vis2', vlSpec2);
+      vegaEmbed('#vis3', vlSpec3);
     </script>
   </body>
 </html>
