@@ -41,6 +41,11 @@
     <h4>Please scrub inside the First Graph. Rest of the graphs shows the details for the Net Sentiment Value.</h4>
     <div id="vis5"></div>
     
+    <h3>Visualizations 12 to 13(Connected):</h3>
+    <h4>Please scrub inside the 13th Graph. Rest of the graph shows the details for the Net Sentiment Value.</h4>
+    <div id="vis6"></div>
+    
+    
     
     
 
@@ -718,13 +723,91 @@
 }
 ;
       
+      
+    var vlSpec6 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+            "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/final_v7.csv"},
+            "vconcat": [
+                {
+                    "layer": [
+
+
+
+                        {
+                            "width": 1100,
+                            "height": 400,
+                            "mark": {"type": "line", "interpolate": "monotone",
+                            "tooltip": {"content": "data"}},
+                            "encoding": {
+                                "x": {
+                                    "field": "Date",
+                                    "type": "temporal",
+                                    "scale": {"domain": {"selection": "brush"}},
+                                    "axis": {"title": ""}
+                                },
+                                "y": {"field": "Value", "type": "quantitative", "title": "Net Sentiment"},
+                                "color": {"field": "Brand", "type": "nominal", "title": "Starbucks",
+                                    "scale": {"domain": ["20 Days Net Sentiment", "Net Sentiment"], "range": ["#e84a27", "#95A5A6"]}
+                                }
+                            }
+
+                        },
+                        {
+                            "width": 1100,
+                            "height": 400,
+                            "mark": {"type": "bar", "opacity": 0.2, "color": "#85C5A6", "tooltip": {"content": "data"}},
+                            "encoding": {
+                                "x": {
+                                    "field": "Date",
+                                    "type": "temporal",
+                                    "scale": {"domain": {"selection": "brush"}},
+                                    "axis": {"title": ""}
+                                },
+                                "y": {
+                                    "field": "Standardized Volume", "type": "quantitative",
+                                    "title": "Standardized Volume(Green Bar & Line)"
+                                },
+                            }
+                        },
+
+
+
+                    ]
+                },
+
+
+                {
+                    "width": 1100,
+                    "height": 200,
+                    "mark": {"type":"area", "tooltip": {"content": "data"}, "color": "#000080"},
+                    "selection": {
+                        "brush": {"type": "interval", "encodings": ["x"]}
+                    },
+                    "encoding": {
+                        "x": {
+                            "field": "Date",
+                            "type": "temporal"
+                        },
+                        "y": {
+                            "field": "Volume",
+                            "type": "quantitative",
+                            "axis": {"tickCount": 3, "grid": false}
+                        }
+                    }
+                }]
+        };
+
+
+      
 
       // Embed the visualization in the container with id `vis`
-      vegaEmbed('#vis1', vlSpec1);
-      vegaEmbed('#vis2', vlSpec2);
-      vegaEmbed('#vis3', vlSpec3);
-      vegaEmbed('#vis4', vlSpec4);
-      vegaEmbed('#vis5', vlSpec5);
+      vegaEmbed('#vis1', vlSpec1, {'actions': false});
+      vegaEmbed('#vis2', vlSpec2, {'actions': false});
+      vegaEmbed('#vis3', vlSpec3, {'actions': false});
+      vegaEmbed('#vis4', vlSpec4, {'actions': false});
+      vegaEmbed('#vis5', vlSpec5, {'actions': false});
+      vegaEmbed('#vis6', vlSpec6, {'actions': false});
+
     </script>
   </body>
 </html>
