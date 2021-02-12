@@ -36,6 +36,12 @@
   },
   "layer": [
     {
+      "mark": "rect",
+      "data": { "url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/layer_test.csv",
+        "format": {
+          "parse": {"start year": "date:'%Y'", "end year": "date:'%Y'"}
+        }
+      },
       "transform": [
         {
           "filter" : {
@@ -58,6 +64,14 @@
     },
     {
       "mark": "line",
+      "transform": [
+        {
+          "filter" : {
+            "field" : "event",
+            "oneOf" : ["population"]
+          }
+        }
+      ],
       "encoding": {
         "x": {
           "field": "start year",
@@ -70,14 +84,6 @@
     },
     {
       "mark": "point",
-      "transform": [
-        {
-          "filter": {
-            "field" : "event",
-            "oneOf" : ["population"]
-          }
-        }
-      ],
       "encoding": {
         "x": {
           "field": "start year",
