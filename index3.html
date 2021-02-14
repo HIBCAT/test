@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IBHI-Demo Visuals</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
+
+    <style media="screen">
+      /* Add space between Vega-Embed links  */
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Container for the visualization -->
+    <div id="vis1"></div>
+
+
+
+
+
+    <script>
+      // Assign the specification to a local variable vlSpec.
+      var vlSpec1 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "description": "The population of the German city of Falkensee over time",
+  "width": 500,
+  "data": { "url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/layer_test2.csv",
+    "format": {
+      "parse": {"date": "date:'%Y'"}
+    }
+  },
+  "layer": [
+    {
+      "mark": "rect",
+      "data": { "url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/layer_test2.csv",
+      "transform": [
+        {
+          "filter" : {
+            "field" : "event_type",
+            "oneOf" : ["Positive Shock - Planned Activity", "Positive Shock - Unplanned Activity", "Negative Shock - Planned Activity", "Negative Shock - Unplanned Activity"]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal"
+        },
+        "x2": {
+          "field": "end_date",
+          "type": "temporal"
+        },
+        "color": {"field": "event_type", "type": "nominal"}
+      }
+    },
+    {
+      "mark": "line",
+      "transform": [
+        {
+          "filter" : {
+            "field" : "attributes",
+            "oneOf" : ["bw_net_senti_0_100", "bw_std_vol_0_20"]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": "year (year)"
+        },
+        "y": {"field": "values", "type": "quantitative"},
+        "color": {"value": "#333"}
+      }
+    },
+    {
+      "mark": "point",
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal"
+        },
+        "y": {"field": "values", "type": "quantitative"},
+        "color": {"value": "#333"}
+      }
+    }
+  ]
+};
+
+
+
+      
+
+      // Embed the visualization in the container with id `vis`
+      vegaEmbed('#vis1', vlSpec1, {'actions': false});
+
+
+    </script>
+  </body>
+</html>
