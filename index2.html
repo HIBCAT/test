@@ -32,16 +32,17 @@
         },
         "layer": [
             {
-                "mark": "rect",
+                "mark": {
+                    "type": "rect",
+                    "tooltip": true,
+                    "color": "#106700"
+                },
                 "transform": [
                     {
                         "filter": {
                             "field": "event_type",
                             "oneOf": [
-                                "Positive Shock - Planned Activity",
-                                "Positive Shock - Unplanned Activity",
-                                "Negative Shock - Planned Activity",
-                                "Negative Shock - Unplanned Activity"
+                                "Positive Shock - Planned Activity"
                             ]
                         }
                     }
@@ -54,17 +55,55 @@
                     "x2": {
                         "field": "end_date",
                         "type": "temporal"
-                    },
-                    "color": {"field": "event_type", "type": "nominal"}
+                    }
                 }
             },
+
             {
-                "mark": "area",
+                "width": 1100,
+                "height": 100,
+                "mark": {
+                    "type": "area",
+                    "tooltip": true,
+                    "color": "#000080"
+                },
                 "transform": [
                     {
                         "filter": {
                             "field": "attributes",
-                            "oneOf": ["cc_net_senti_0_100"]
+                            "oneOf": ["bw_std_vol_0_20"]
+                        }
+                    }
+                ],
+                "selection": {
+                    "brush": {"type": "interval", "encodings": ["x"]}
+                },
+                "encoding": {
+                    "x": {
+                        "field": "date",
+                        "type": "temporal",
+                        "title": "year (year)"
+                    },
+                    "y": {
+                        "field": "values", "type": "quantitative",
+                        "axis": {"tickCount": 3, "grid": false}
+                    },
+                }
+            },
+
+            {
+                "width": 1100,
+                "height": 100,
+                "mark": {
+                    "type": "area",
+                    "tooltip": true,
+                    "color": "#e84a27"
+                },
+                "transform": [
+                    {
+                        "filter": {
+                            "field": "attributes",
+                            "oneOf": ["cc_std_vol_0_20"]
                         }
                     }
                 ],
@@ -74,11 +113,15 @@
                         "type": "temporal",
                         "title": "year (year)"
                     },
-                    "y": {"field": "values", "type": "quantitative"},
-                    "color": {"value": "#333"}
+                    "y": {
+                        "field": "values", "type": "quantitative",
+                        "axis": {"tickCount": 3, "grid": false}
+                    },
                 }
             }
-            ]
+
+
+        ]
     };
 
 

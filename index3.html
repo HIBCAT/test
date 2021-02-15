@@ -1,342 +1,353 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>IBHI-Demo Visuals</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
 
     <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
 
     <style media="screen">
-      /* Add space between Vega-Embed links  */
-      .vega-actions a {
-        margin-right: 5px;
-      }
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
     </style>
-  </head>
-  <body>
-    <!-- Container for the visualization -->
-    <div id="vis1"></div>
+</head>
+<body>
+<!-- Container for the visualization -->
+<div id="vis1"></div>
 
 
+<script>
+    // Assign the specification to a local variable vlSpec.
 
-
-    <script>
-      // Assign the specification to a local variable vlSpec.
-
-      var vlSpec1 = {
+    var vlSpec1 = {
         "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
         "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/layer_test2.csv"},
         "vconcat": [
-          <!--Graph 1-->
-          {"layer": [
+            <!--Graph 1-->
+            {
+                "layer": [
 
-              <!--Main 1-->
-              {
-            "width": 1100,
-            "height": 100,
-            "mark": {"type": "area", "tooltip": true},
-            "transform": [
-              {
-                "filter": {
-                  "field": "attributes",
-                  "oneOf": ["bw_std_vol_0_20", "cc_std_vol_0_20"]
-                }
-              }
-            ],
-            "selection": {
-              "brush": {"type": "interval", "encodings": ["x"]}
+                    <!--Main 1-->
+                    {
+                        "width": 1100,
+                        "height": 100,
+                        "mark": {"type": "area", "tooltip": true},
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "attributes",
+                                    "oneOf": ["bw_std_vol_0_20", "cc_std_vol_0_20"]
+                                }
+                            }
+                        ],
+                        "selection": {
+                            "brush": {"type": "interval", "encodings": ["x"]}
+                        },
+                        "encoding": {
+                            "color": {
+                                "field": "attributes", "type": "nominal", "title": "Starbucks",
+                                "scale": {
+                                    "domain": ["cc_std_vol_0_20", "bw_std_vol_0_20"],
+                                    "range": ["#e84a27", "#000080"]
+                                }
+                            },
+                            "x": {
+                                "field": "date",
+                                "type": "temporal"
+                            },
+                            "y": {
+                                "field": "values",
+                                "type": "quantitative",
+                                "axis": {"tickCount": 3, "grid": false}
+                            }
+
+                        }
+                    }
+                ]
             },
-            "encoding": {
-              "color": {
-                "field": "attributes", "type": "nominal", "title": "Starbucks",
-                "scale": {"domain": ["cc_std_vol_0_20", "bw_std_vol_0_20"], "range": ["#e84a27", "#000080"]}
-              },
-              "x": {
-                "field": "date",
-                "type": "temporal"
-              },
-              "y": {
-                "field": "values",
-                "type": "quantitative",
-                "axis": {"tickCount": 3, "grid": false}
-              }
 
+            <!--Graph 2-->
+            {
+                "layer": [
+
+
+                    <!--Main 2-->
+                    {
+                        "width": 1100,
+                        "height": 100,
+                        "mark": {"type": "area", "tooltip": true},
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "attributes",
+                                    "oneOf": ["cc_volume"]
+                                }
+                            }
+                        ],
+
+                        "encoding": {
+                            "color": {
+                                "field": "attributes", "type": "nominal", "title": "Starbucks",
+                                "scale": {"domain": ["cc_volume", "bw_volume"], "range": ["#e84a27", "#000080"]}
+                            },
+                            "x": {
+                                "field": "date",
+                                "type": "temporal",
+                                "scale": {"domain": {"selection": "brush"}}
+
+                            },
+                            "y": {
+                                "field": "values",
+                                "type": "quantitative",
+                                "axis": {"tickCount": 3, "grid": false}
+                            }
+
+                        }
+                    }
+                ]
+            },
+
+
+            <!--Graph 3-->
+            {
+                "layer": [
+                    <!--Main 3-->
+                    {
+                        "width": 1100,
+                        "height": 100,
+                        "mark": {"type": "area", "tooltip": true},
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "attributes",
+                                    "oneOf": ["bw_volume"]
+                                }
+                            }
+                        ],
+
+                        "encoding": {
+                            "color": {
+                                "field": "attributes", "type": "nominal", "title": "Starbucks",
+                                "scale": {"domain": ["cc_volume", "bw_volume"], "range": ["#e84a27", "#000080"]}
+                            },
+                            "x": {
+                                "field": "date",
+                                "type": "temporal",
+                                "scale": {"domain": {"selection": "brush"}}
+
+                            },
+                            "y": {
+                                "field": "values",
+                                "type": "quantitative",
+                                "axis": {"tickCount": 3, "grid": false}
+                            }
+
+                        }
+                    }
+                ]
+            },
+
+
+            <!--Graph 4-->
+            {
+                "layer": [
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#e84a27"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_net_senti_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_vwas"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {"type": "bar", "opacity": 0.2, "color": "#85C5A6", "tooltip": true},
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_std_vol_0_20"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {
+                                        "field": "values", "type": "quantitative",
+                                        "title": "Standardized Volume(Green Bar & Line)"
+                                    },
+                                }
+                            },
+
+
+                        ]
+                    }
+                ]
+            },
+
+
+            <!--Graph 5-->
+            {
+                "layer": [
+                    <!--Main 5-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#000080"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_net_senti_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6",
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_vwas"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {"type": "bar", "opacity": 0.2, "color": "#85C5A6", "tooltip": true},
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_std_vol_0_20"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {
+                                        "field": "values", "type": "quantitative",
+                                        "title": "Standardized Volume(Green Bar & Line)"
+                                    },
+                                }
+                            },
+
+
+                        ]
+                    }
+                ]
             }
-          }
-            ]},
-
-          <!--Graph 2-->
-          {"layer": [
-
-
-              <!--Main 2-->
-              {
-            "width": 1100,
-            "height": 100,
-            "mark": {"type": "area", "tooltip": true},
-            "transform": [
-              {
-                "filter": {
-                  "field": "attributes",
-                  "oneOf": ["cc_volume"]
-                }
-              }
-            ],
-
-            "encoding": {
-              "color": {
-                "field": "attributes", "type": "nominal", "title": "Starbucks",
-                "scale": {"domain": ["cc_volume", "bw_volume"], "range": ["#e84a27", "#000080"]}
-              },
-              "x": {
-                "field": "date",
-                "type": "temporal",
-                "scale": {"domain": {"selection": "brush"}}
-
-              },
-              "y": {
-                "field": "values",
-                "type": "quantitative",
-                "axis": {"tickCount": 3, "grid": false}
-              }
-
-            }
-          }
-            ]},
-
-
-          <!--Graph 3-->
-          {"layer": [
-             <!--Main 3-->
-                  {
-            "width": 1100,
-            "height": 100,
-            "mark": {"type": "area", "tooltip": true},
-            "transform": [
-              {
-                "filter": {
-                  "field": "attributes",
-                  "oneOf": ["bw_volume"]
-                }
-              }
-            ],
-
-            "encoding": {
-              "color": {
-                "field": "attributes", "type": "nominal", "title": "Starbucks",
-                "scale": {"domain": ["cc_volume", "bw_volume"], "range": ["#e84a27", "#000080"]}
-              },
-              "x": {
-                "field": "date",
-                "type": "temporal",
-                "scale": {"domain": {"selection": "brush"}}
-
-              },
-              "y": {
-                "field": "values",
-                "type": "quantitative",
-                "axis": {"tickCount": 3, "grid": false}
-              }
-
-            }
-          }
-            ]},
-
-
-          <!--Graph 4-->
-          {"layer": [
-<!--Main 4-->
-              {
-            "layer": [
-
-              {
-                "width": 1100,
-                "height": 400,
-                "mark": {
-                  "type": "line", "interpolate": "monotone",
-                  "tooltip": true,
-                  "color": "#e84a27"
-                },
-                "transform": [
-                  {
-                    "filter": {
-                      "field": "attributes",
-                      "oneOf": ["cc_net_senti_0_100"]
-                    }
-                  }
-                ],
-                "encoding": {
-                  "x": {
-                    "field": "date",
-                    "type": "temporal",
-                    "scale": {"domain": {"selection": "brush"}},
-                    "axis": {"title": ""}
-                  },
-                  "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
-                }
-
-              },
-              {
-                "width": 1100,
-                "height": 400,
-                "mark": {
-                  "type": "line", "interpolate": "monotone",
-                  "tooltip": true,
-                  "color": "#95A5A6"
-                },
-                "transform": [
-                  {
-                    "filter": {
-                      "field": "attributes",
-                      "oneOf": ["cc_vwas"]
-                    }
-                  }
-                ],
-                "encoding": {
-                  "x": {
-                    "field": "date",
-                    "type": "temporal",
-                    "scale": {"domain": {"selection": "brush"}},
-                    "axis": {"title": ""}
-                  },
-                  "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
-                }
-
-              },
-              {
-                "width": 1100,
-                "height": 400,
-                "mark": {"type": "bar", "opacity": 0.2, "color": "#85C5A6", "tooltip": true},
-                "transform": [
-                  {
-                    "filter": {
-                      "field": "attributes",
-                      "oneOf": ["cc_std_vol_0_20"]
-                    }
-                  }
-                ],
-                "encoding": {
-                  "x": {
-                    "field": "date",
-                    "type": "temporal",
-                    "scale": {"domain": {"selection": "brush"}},
-                    "axis": {"title": ""}
-                  },
-                  "y": {
-                    "field": "values", "type": "quantitative",
-                    "title": "Standardized Volume(Green Bar & Line)"
-                  },
-                }
-              },
-
-
-            ]
-          }
-            ]},
-
-
-          <!--Graph 5-->
-          {"layer": [
-<!--Main 5-->
-              {
-            "layer": [
-
-              {
-                "width": 1100,
-                "height": 400,
-                "mark": {
-                  "type": "line", "interpolate": "monotone",
-                  "tooltip": true,
-                  "color": "#000080"
-                },
-                "transform": [
-                  {
-                    "filter": {
-                      "field": "attributes",
-                      "oneOf": ["bw_net_senti_0_100"]
-                    }
-                  }
-                ],
-                "encoding": {
-                  "x": {
-                    "field": "date",
-                    "type": "temporal",
-                    "scale": {"domain": {"selection": "brush"}},
-                    "axis": {"title": ""}
-                  },
-                  "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
-                }
-
-              },
-              {
-                "width": 1100,
-                "height": 400,
-                "mark": {
-                  "type": "line", "interpolate": "monotone",
-                  "tooltip": true,
-                  "color": "#95A5A6",
-                },
-                "transform": [
-                  {
-                    "filter": {
-                      "field": "attributes",
-                      "oneOf": ["bw_vwas"]
-                    }
-                  }
-                ],
-                "encoding": {
-                  "x": {
-                    "field": "date",
-                    "type": "temporal",
-                    "scale": {"domain": {"selection": "brush"}},
-                    "axis": {"title": ""}
-                  },
-                  "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
-                }
-
-              },
-              {
-                "width": 1100,
-                "height": 400,
-                "mark": {"type": "bar", "opacity": 0.2, "color": "#85C5A6", "tooltip": true},
-                "transform": [
-                  {
-                    "filter": {
-                      "field": "attributes",
-                      "oneOf": ["bw_std_vol_0_20"]
-                    }
-                  }
-                ],
-                "encoding": {
-                  "x": {
-                    "field": "date",
-                    "type": "temporal",
-                    "scale": {"domain": {"selection": "brush"}},
-                    "axis": {"title": ""}
-                  },
-                  "y": {
-                    "field": "values", "type": "quantitative",
-                    "title": "Standardized Volume(Green Bar & Line)"
-                  },
-                }
-              },
-
-
-            ]
-          }
-            ]}
 
 
         ]
-      };
+    };
 
 
-      // Embed the visualization in the container with id `vis`
-      vegaEmbed('#vis1', vlSpec1, {'actions': false});
+    // Embed the visualization in the container with id `vis`
+    vegaEmbed('#vis1', vlSpec1, {'actions': false});
 
 
-    </script>
-  </body>
+</script>
+</body>
 </html>
