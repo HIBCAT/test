@@ -1,0 +1,52 @@
+                {
+                    "layer": [
+
+                        {
+                            "width": 1100,
+                            "height": 400,
+                            "mark": {"type": "line", "interpolate": "monotone",
+                              "transform": [
+        {
+          "filter" : {
+            "field" : "event",
+            "oneOf" : ["Nazi Rule", "GDR (East Germany)"]
+          }
+        }
+      ],
+                            "tooltip": {"content": "data"}},
+                            "encoding": {
+                                "x": {
+                                    "field": "Date",
+                                    "type": "temporal",
+                                    "scale": {"domain": {"selection": "brush"}},
+                                    "axis": {"title": ""}
+                                },
+                                "y": {"field": "Value", "type": "quantitative", "title": "Net Sentiment"},
+                                "color": {"field": "Brand", "type": "nominal", "title": "Starbucks",
+                                    "scale": {"domain": ["20 Days Net Sentiment", "Net Sentiment"], "range": ["#e84a27", "#95A5A6"]}
+                                }
+                            }
+
+                        },
+                        {
+                            "width": 1100,
+                            "height": 400,
+                            "mark": {"type": "bar", "opacity": 0.2, "color": "#85C5A6", "tooltip": {"content": "data"}},
+                            "encoding": {
+                                "x": {
+                                    "field": "Date",
+                                    "type": "temporal",
+                                    "scale": {"domain": {"selection": "brush"}},
+                                    "axis": {"title": ""}
+                                },
+                                "y": {
+                                    "field": "Standardized Volume", "type": "quantitative",
+                                    "title": "Standardized Volume(Green Bar & Line)"
+                                },
+                            }
+                        },
+
+
+
+                    ]
+                },

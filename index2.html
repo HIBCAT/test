@@ -1,109 +1,91 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>IBHI-Demo Visuals</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
 
     <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
 
     <style media="screen">
-      /* Add space between Vega-Embed links  */
-      .vega-actions a {
-        margin-right: 5px;
-      }
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
     </style>
-  </head>
-  <body>
-    <!-- Container for the visualization -->
-    <div id="vis1"></div>
+</head>
+<body>
+<!-- Container for the visualization -->
+<div id="vis1"></div>
 
 
-
-
-
-    <script>
-      // Assign the specification to a local variable vlSpec.
-      var vlSpec1 = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "description": "The population of the German city of Falkensee over time",
-  "width": 500,
-  "data": { "url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/layer_test.csv",
-    "format": {
-      "parse": {"start year": "date:'%Y'"}
-    }
-  },
-  "layer": [
-    {
-      "mark": "rect",
-      "data": { "url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/layer_test.csv",
-        "format": {
-          "parse": {"start year": "date:'%Y'", "end year": "date:'%Y'"}
-        }
-      },
-      "transform": [
-        {
-          "filter" : {
-            "field" : "event",
-            "oneOf" : ["Nazi Rule", "GDR (East Germany)"]
-          }
-        }
-      ],
-      "encoding": {
-        "x": {
-          "field": "start year",
-          "timeUnit": "year"
+<script>
+    // Assign the specification to a local variable vlSpec.
+    var vlSpec1 = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+        "description": "The population of the German city of Falkensee over time",
+        "width": 1100,
+        "height" : 100,
+        "data": {
+            "url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/layer_test2.csv"
         },
-        "x2": {
-          "field": "end year",
-          "timeUnit": "year"
-        },
-        "color": {"field": "event", "type": "nominal"}
-      }
-    },
-    {
-      "mark": "line",
-      "transform": [
-        {
-          "filter" : {
-            "field" : "event",
-            "oneOf" : ["population"]
-          }
-        }
-      ],
-      "encoding": {
-        "x": {
-          "field": "start year",
-          "timeUnit": "year",
-          "title": "year (year)"
-        },
-        "y": {"field": "population", "type": "quantitative"},
-        "color": {"value": "#333"}
-      }
-    },
-    {
-      "mark": "point",
-      "encoding": {
-        "x": {
-          "field": "start year",
-          "timeUnit": "year"
-        },
-        "y": {"field": "population", "type": "quantitative"},
-        "color": {"value": "#333"}
-      }
-    }
-  ]
-};
+        "layer": [
+            {
+                "mark": "rect",
+                "transform": [
+                    {
+                        "filter": {
+                            "field": "event_type",
+                            "oneOf": [
+                                "Positive Shock - Planned Activity",
+                                "Positive Shock - Unplanned Activity",
+                                "Negative Shock - Planned Activity",
+                                "Negative Shock - Unplanned Activity"
+                            ]
+                        }
+                    }
+                ],
+                "encoding": {
+                    "x": {
+                        "field": "date",
+                        "type": "temporal"
+                    },
+                    "x2": {
+                        "field": "end_date",
+                        "type": "temporal"
+                    },
+                    "color": {"field": "event_type", "type": "nominal"}
+                }
+            },
+            {
+                "mark": "area",
+                "transform": [
+                    {
+                        "filter": {
+                            "field": "attributes",
+                            "oneOf": ["cc_net_senti_0_100"]
+                        }
+                    }
+                ],
+                "encoding": {
+                    "x": {
+                        "field": "date",
+                        "type": "temporal",
+                        "title": "year (year)"
+                    },
+                    "y": {"field": "values", "type": "quantitative"},
+                    "color": {"value": "#333"}
+                }
+            }
+            ]
+    };
 
 
-
-      
-
-      // Embed the visualization in the container with id `vis`
-      vegaEmbed('#vis1', vlSpec1, {'actions': false});
+    // Embed the visualization in the container with id `vis`
+    vegaEmbed('#vis1', vlSpec1, {'actions': false});
 
 
-    </script>
-  </body>
+</script>
+</body>
 </html>
