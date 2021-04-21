@@ -26,21 +26,105 @@
     var vlSpec1 = {
         "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
         "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/layer_test2.csv"},
+        "transform": [{
+            "window": [{"op": "row_number", "as": "row_number"}]
+        }],
         "vconcat": [
             <!--Graph 1-->
             {
                 "layer": [
+                    <!--Event Details-->
+                    {
+                        "mark": "rect",
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "event_type",
+                                    "oneOf": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "color": {
+                                "field": "event_type", "type": "nominal",
+                                "title": "Legend",
+                                "scale": {
+                                    "domain": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ],
+                                    "range": [
+                                        "#106700",
+                                        "#6bf352",
+                                        "#fcd600",
+                                        "#f92800"
+                                    ]
+                                }
+
+                            },
+                            "x": {
+                                "field": "date",
+                                "type": "temporal"
+                            },
+                            "x2": {
+                                "field": "end_date",
+                                "type": "temporal"
+                            }
+                        }
+                    },
 
                     <!--Main 1-->
                     {
                         "width": 1100,
                         "height": 100,
-                        "mark": {"type": "area", "tooltip": true},
+                        "mark": {
+                            "type": "area",
+                            "tooltip": true,
+                            "color": "#000080"
+                        },
                         "transform": [
                             {
                                 "filter": {
                                     "field": "attributes",
-                                    "oneOf": ["bw_std_vol_0_20", "cc_std_vol_0_20"]
+                                    "oneOf": ["bw_std_vol_0_20"]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "x": {
+                                "field": "date",
+                                "type": "temporal",
+                                "title": "Date"
+                            },
+                            "y": {
+                                "field": "values", "type": "quantitative",
+                                "axis": {
+                                    "tickCount": 3, "grid": false,
+                                    "title": "Standardized Volume"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "width": 1100,
+                        "height": 100,
+                        "mark": {
+                            "type": "area",
+                            "tooltip": true,
+                            "color": "#e84a27",
+                        },
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "attributes",
+                                    "oneOf": ["cc_std_vol_0_20"]
                                 }
                             }
                         ],
@@ -48,38 +132,130 @@
                             "brush": {"type": "interval", "encodings": ["x"]}
                         },
                         "encoding": {
-                            "color": {
-                                "field": "attributes", "type": "nominal", "title": "Starbucks",
-                                "scale": {
-                                    "domain": ["cc_std_vol_0_20", "bw_std_vol_0_20"],
-                                    "range": ["#e84a27", "#000080"]
-                                }
-                            },
                             "x": {
                                 "field": "date",
-                                "type": "temporal"
+                                "type": "temporal",
+                                "title": "year (year)"
                             },
                             "y": {
-                                "field": "values",
-                                "type": "quantitative",
+                                "field": "values", "type": "quantitative",
                                 "axis": {"tickCount": 3, "grid": false}
-                            }
-
+                            },
                         }
                     }
                 ]
             },
 
+            {
+                "transform": [
+                    {"filter": {"selection": "brush"}},
+                    {"window": [{"op": "rank", "as": "rank"}]},
+                    {"filter": {"field": "rank", "lt": 15}}
+                ],
+
+                "hconcat" : [
+                    {
+                        "width": 50,
+                        "title": "Positive",
+                        "mark": "text",
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "attributes",
+                                    "oneOf": ["bw_positive"]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "text": {"field": "date", "type": "temporal"},
+                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+                        }
+                    },
+                    {
+                        "width": 50,
+                        "title": "Positive",
+                        "mark": "text",
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "attributes",
+                                    "oneOf": ["bw_positive"]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "text": {"field": "values", "type": "nominal"},
+                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+                        }
+                    }
+                ]
+
+
+
+            },
+
+
             <!--Graph 2-->
             {
                 "layer": [
 
+                    <!--Event Details-->
+                    {
+                        "mark": "rect",
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "event_type",
+                                    "oneOf": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "color": {
+                                "field": "event_type", "type": "nominal",
+                                "title": "Legend",
+
+                                "scale": {
+                                    "domain": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ],
+                                    "range": [
+                                        "#106700",
+                                        "#6bf352",
+                                        "#fcd600",
+                                        "#f92800"
+                                    ]
+                                }
+
+                            },
+                            "x": {
+                                "field": "date",
+                                "type": "temporal"
+                            },
+                            "x2": {
+                                "field": "end_date",
+                                "type": "temporal"
+                            }
+                        }
+                    },
 
                     <!--Main 2-->
                     {
                         "width": 1100,
                         "height": 100,
-                        "mark": {"type": "area", "tooltip": true},
+                        "mark": {
+                            "type": "area",
+                            "tooltip": true,
+                            "color": "#e84a27"
+                        },
                         "transform": [
                             {
                                 "filter": {
@@ -90,60 +266,22 @@
                         ],
 
                         "encoding": {
-                            "color": {
-                                "field": "attributes", "type": "nominal", "title": "Starbucks",
-                                "scale": {"domain": ["cc_volume", "bw_volume"], "range": ["#e84a27", "#000080"]}
-                            },
                             "x": {
                                 "field": "date",
                                 "type": "temporal",
-                                "scale": {"domain": {"selection": "brush"}}
+                                "scale": {"domain": {"selection": "brush"}},
+                                "axis": {"title": "ClineCenter: News Media Post Volume"}
 
                             },
                             "y": {
                                 "field": "values",
                                 "type": "quantitative",
-                                "axis": {"tickCount": 3, "grid": false}
-                            }
-
-                        }
-                    }
-                ]
-            },
-
-
-            <!--Graph 3-->
-            {
-                "layer": [
-                    <!--Main 3-->
-                    {
-                        "width": 1100,
-                        "height": 100,
-                        "mark": {"type": "area", "tooltip": true},
-                        "transform": [
-                            {
-                                "filter": {
-                                    "field": "attributes",
-                                    "oneOf": ["bw_volume"]
+                                "axis": {
+                                    "tickCount": 3, "grid": false,
+                                    "title": "Post Volume"
                                 }
-                            }
-                        ],
 
-                        "encoding": {
-                            "color": {
-                                "field": "attributes", "type": "nominal", "title": "Starbucks",
-                                "scale": {"domain": ["cc_volume", "bw_volume"], "range": ["#e84a27", "#000080"]}
-                            },
-                            "x": {
-                                "field": "date",
-                                "type": "temporal",
-                                "scale": {"domain": {"selection": "brush"}}
 
-                            },
-                            "y": {
-                                "field": "values",
-                                "type": "quantitative",
-                                "axis": {"tickCount": 3, "grid": false}
                             }
 
                         }
@@ -155,6 +293,52 @@
             <!--Graph 4-->
             {
                 "layer": [
+                    <!--Event Details-->
+                    {
+                        "mark": "rect",
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "event_type",
+                                    "oneOf": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "color": {
+                                "field": "event_type", "type": "nominal",
+                                "scale": {
+                                    "domain": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ],
+                                    "range": [
+                                        "#106700",
+                                        "#6bf352",
+                                        "#fcd600",
+                                        "#f92800"
+                                    ]
+                                }
+
+                            },
+                            "x": {
+                                "field": "date",
+                                "type": "temporal"
+                            },
+                            "x2": {
+                                "field": "end_date",
+                                "type": "temporal"
+                            }
+                        }
+                    },
+
                     <!--Main 4-->
                     {
                         "layer": [
@@ -216,7 +400,7 @@
                             {
                                 "width": 1100,
                                 "height": 400,
-                                "mark": {"type": "bar", "opacity": 0.2, "color": "#85C5A6", "tooltip": true},
+                                "mark": {"type": "bar", "opacity": 0.2, "color": "#000080", "tooltip": true},
                                 "transform": [
                                     {
                                         "filter": {
@@ -230,11 +414,11 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "ClineCenter ( Blue: Net Sentiment | Grey: Volumetric Weighted Avg Sentiment Score )"}
                                     },
                                     "y": {
                                         "field": "values", "type": "quantitative",
-                                        "title": "Standardized Volume(Green Bar & Line)"
+                                        "title": "Standardized Volume(Green Bar)"
                                     },
                                 }
                             },
@@ -245,10 +429,147 @@
                 ]
             },
 
+            <!--Graph 3-->
+            {
+                "layer": [
+                    <!--Event Details-->
+                    {
+                        "mark": "rect",
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "event_type",
+                                    "oneOf": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "color": {
+                                "field": "event_type", "type": "nominal",
+                                "title": "Legend",
+
+                                "scale": {
+                                    "domain": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ],
+                                    "range": [
+                                        "#106700",
+                                        "#6bf352",
+                                        "#fcd600",
+                                        "#f92800"
+                                    ]
+                                }
+
+                            },
+                            "x": {
+                                "field": "date",
+                                "type": "temporal"
+                            },
+                            "x2": {
+                                "field": "end_date",
+                                "type": "temporal"
+                            }
+                        }
+                    },
+
+                    <!--Main 3-->
+                    {
+                        "width": 1100,
+                        "height": 100,
+                        "mark": {
+                            "type": "area",
+                            "tooltip": true,
+                            "color": "#000080"
+                        },
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "attributes",
+                                    "oneOf": ["bw_volume"]
+                                }
+                            }
+                        ],
+
+                        "encoding": {
+                            "x": {
+                                "field": "date",
+                                "type": "temporal",
+                                "axis": {"title": "BrandWatch: Social Media Post Volume"},
+
+                                "scale": {"domain": {"selection": "brush"}}
+
+                            },
+                            "y": {
+                                "field": "values",
+                                "type": "quantitative",
+                                "axis": {"tickCount": 3, "grid": false, "title": "Post Volume"}
+                            }
+
+                        }
+                    }
+                ]
+            },
+
+
 
             <!--Graph 5-->
             {
                 "layer": [
+
+                    <!--Event Details-->
+                    {
+                        "mark": "rect",
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "event_type",
+                                    "oneOf": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "color": {
+                                "field": "event_type", "type": "nominal",
+                                "scale": {
+                                    "domain": [
+                                        "Positive Shock - Planned Activity",
+                                        "Positive Shock - Unplanned Activity",
+                                        "Negative Shock - Planned Activity",
+                                        "Negative Shock - Unplanned Activity"
+                                    ],
+                                    "range": [
+                                        "#106700",
+                                        "#6bf352",
+                                        "#fcd600",
+                                        "#f92800"
+                                    ]
+                                }
+
+                            },
+                            "x": {
+                                "field": "date",
+                                "type": "temporal"
+                            },
+                            "x2": {
+                                "field": "end_date",
+                                "type": "temporal"
+                            }
+                        }
+                    },
+
                     <!--Main 5-->
                     {
                         "layer": [
@@ -310,13 +631,15 @@
                             {
                                 "width": 1100,
                                 "height": 400,
-                                "mark": {"type": "bar", "opacity": 0.2, "color": "#85C5A6", "tooltip": true},
+                                "mark": {"type": "bar", "opacity": 0.2, "color": "#000080", "tooltip": true},
                                 "transform": [
                                     {
                                         "filter": {
                                             "field": "attributes",
                                             "oneOf": ["bw_std_vol_0_20"]
-                                        }
+                                        },
+                                        "calculate": "{'bw_std_vol_0_20': 'Social Media Standard Volume (Scale 0 to 20)'}[datum.attributes]",
+                                        "as": "attributes"
                                     }
                                 ],
                                 "encoding": {
@@ -324,11 +647,11 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "BrandWatch ( Blue: Net Sentiment | Grey: Volumetric Weighted Avg Sentiment Score )"}
                                     },
                                     "y": {
                                         "field": "values", "type": "quantitative",
-                                        "title": "Standardized Volume(Green Bar & Line)"
+                                        "title": "Standardized Volume(Green Bar)"
                                     },
                                 }
                             },
@@ -337,15 +660,20 @@
                         ]
                     }
                 ]
-            }
+            },
 
 
-        ]
+
+
+
+        ],
+
+        "resolve": {"legend": {"color": "independent"}}
     };
 
 
     // Embed the visualization in the container with id `vis`
-    vegaEmbed('#vis1', vlSpec1, {'actions': false});
+    vegaEmbed('#vis1', vlSpec1, {'actions': true});
 
 
 </script>
