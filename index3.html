@@ -98,6 +98,21 @@
                             }
                         ],
                         "encoding": {
+                            "color": {
+                                "field": "attributes", "type": "nominal",
+                                "title": "Legend",
+                                "scale": {
+                                    "domain": [
+                                        "bw_std_vol_0_20"
+                                    ],
+                                    "range": [
+                                        "#106700"
+
+                                    ]
+                                }
+
+                            },
+
                             "x": {
                                 "field": "date",
                                 "type": "temporal",
@@ -591,6 +606,21 @@
                                     }
                                 ],
                                 "encoding": {
+                                    "color": {
+                                "field": "event_type", "type": "nominal",
+                                "scale": {
+                                    "domain": ["bw_net_senti_0_100"
+                                    ],
+                                    "range": [
+                                        "#106700",
+                                        "#6bf352",
+                                        "#fcd600",
+                                        "#f92800"
+                                    ]
+                                }
+
+                            },
+
                                     "x": {
                                         "field": "date",
                                         "type": "temporal",

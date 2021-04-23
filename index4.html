@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IBHI-Demo Visuals</title>
+    <meta charset="utf-8"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
+
+    <style media="screen">
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<!-- Container for the visualization -->
+<div id="vis1"></div>
+
+
+<script>
+    // Assign the specification to a local variable vlSpec.
+
+    var vlSpec1 = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+        "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/feature_2_april_21.csv"},
+        "transform": [{
+            "window": [{"op": "row_number", "as": "row_number"}]
+        }],
+        "vconcat": [
+            <!--Graph 1-->
+            {
+                "layer": [
+                    <!--Event Details-->
+                    <!--Main 1-->
+                    {
+                        "width": 1100,
+                        "height": 100,
+                        "mark": {
+                            "type": "line",
+                            "tooltip": true,
+                            "color": "#000080"
+                        },
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "attributes",
+                                    "oneOf": ["bw_3ma_volume_std_0_100"]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "x": {
+                                "field": "date",
+                                "type": "temporal",
+                                "title": "Date"
+                            },
+                            "y": {
+                                "field": "values", "type": "quantitative",
+                                "axis": {
+                                    "tickCount": 3, "grid": false,
+                                    "title": "Standardized Volume"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "width": 1100,
+                        "height": 100,
+                        "mark": {
+                            "type": "line",
+                            "tooltip": true,
+                            "color": "#e84a27",
+                        },
+                        "transform": [
+                            {
+                                "filter": {
+                                    "field": "attributes",
+                                    "oneOf": ["cc_3ma_volume_std_0_100"]
+                                }
+                            }
+                        ],
+                        "selection": {
+                            "brush": {"type": "interval", "encodings": ["x"]}
+                        },
+                        "encoding": {
+                            "x": {
+                                "field": "date",
+                                "type": "temporal",
+                                "title": "year (year)"
+                            },
+                            "y": {
+                                "field": "values", "type": "quantitative",
+                                "axis": {"tickCount": 3, "grid": false}
+                            },
+                        }
+                    }
+                ]
+            },
+
+
+
+            <!--Graph 2-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#008000"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_positive"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_neutral"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#DC143C"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_negative"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_volume"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+
+
+                        ]
+                    }
+                ]
+            },
+
+
+            <!--Graph 3-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#008000"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_positive"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_neutral"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#DC143C"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_negative"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_volume"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 4-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_positive"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#008000"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_positive"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 5-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_neutral"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_neutral"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 6-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_negative"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#DC143C"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_negative"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 7-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_volume"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_volume"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 8-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_positive"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#008000"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_positive"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 9-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_neutral"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_neutral"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 10-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_negative"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#DC143C"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_negative"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 11-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_volume"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_volume"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 12-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_positive_std_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#008000"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_positive_std_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 13-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_neutral_std_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_neutral_std_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 14-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_negative_std_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#DC143C"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_negative_std_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 15-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_volume_std_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            },
+                            {
+                                "width": 1100,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_volume_std_0_100"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+
+
+
+
+        ],
+
+        "resolve": {"legend": {"color": "independent"}}
+    };
+
+
+    // Embed the visualization in the container with id `vis`
+    vegaEmbed('#vis1', vlSpec1, {'actions': true});
+
+
+</script>
+</body>
+</html>
