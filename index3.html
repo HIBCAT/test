@@ -49,6 +49,8 @@
                                 }
                             }
                         ],
+
+
                         "encoding": {
                             "color": {
                                 "field": "event_type", "type": "nominal",
@@ -85,7 +87,7 @@
                         "width": 1100,
                         "height": 100,
                         "mark": {
-                            "type": "area",
+                            "type": "line",
                             "tooltip": true,
                             "color": "#000080"
                         },
@@ -131,7 +133,7 @@
                         "width": 1100,
                         "height": 100,
                         "mark": {
-                            "type": "area",
+                            "type": "line",
                             "tooltip": true,
                             "color": "#e84a27",
                         },
@@ -161,53 +163,6 @@
                 ]
             },
 
-            {
-                "transform": [
-                    {"filter": {"selection": "brush"}},
-                    {"window": [{"op": "rank", "as": "rank"}]},
-                    {"filter": {"field": "rank", "lt": 15}}
-                ],
-
-                "hconcat" : [
-                    {
-                        "width": 50,
-                        "title": "Positive",
-                        "mark": "text",
-                        "transform": [
-                            {
-                                "filter": {
-                                    "field": "attributes",
-                                    "oneOf": ["bw_positive"]
-                                }
-                            }
-                        ],
-                        "encoding": {
-                            "text": {"field": "date", "type": "temporal"},
-                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
-                        }
-                    },
-                    {
-                        "width": 50,
-                        "title": "Positive",
-                        "mark": "text",
-                        "transform": [
-                            {
-                                "filter": {
-                                    "field": "attributes",
-                                    "oneOf": ["bw_positive"]
-                                }
-                            }
-                        ],
-                        "encoding": {
-                            "text": {"field": "values", "type": "nominal"},
-                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
-                        }
-                    }
-                ]
-
-
-
-            },
 
 
             <!--Graph 2-->
@@ -267,7 +222,7 @@
                         "width": 1100,
                         "height": 100,
                         "mark": {
-                            "type": "area",
+                            "type": "line",
                             "tooltip": true,
                             "color": "#e84a27"
                         },
@@ -500,7 +455,7 @@
                         "width": 1100,
                         "height": 100,
                         "mark": {
-                            "type": "area",
+                            "type": "line",
                             "tooltip": true,
                             "color": "#000080"
                         },
@@ -693,12 +648,7 @@
             },
 
 
-
-
-
-        ],
-
-        "resolve": {"legend": {"color": "independent"}}
+        ]
     };
 
 

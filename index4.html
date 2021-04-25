@@ -25,7 +25,12 @@
 
     var vlSpec1 = {
         "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-        "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/feature_2_april_21.csv"},
+        "title": {
+            "text": "United Airlines",
+            "align": "middle",
+            "fontSize": 50
+        },
+        "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/UnitedAirline.csv"},
         "transform": [{
             "window": [{"op": "row_number", "as": "row_number"}]
         }],
@@ -40,8 +45,10 @@
                         "height": 100,
                         "mark": {
                             "type": "line",
+                            "strokeWidth": 1,
                             "tooltip": true,
                             "color": "#000080"
+
                         },
                         "transform": [
                             {
@@ -55,7 +62,7 @@
                             "x": {
                                 "field": "date",
                                 "type": "temporal",
-                                "title": "Date"
+                                "title": "Blue: Social Media | Orange: News Media| Date"
                             },
                             "y": {
                                 "field": "values", "type": "quantitative",
@@ -71,6 +78,8 @@
                         "height": 100,
                         "mark": {
                             "type": "line",
+                            "strokeWidth": 1,
+
                             "tooltip": true,
                             "color": "#e84a27",
                         },
@@ -115,7 +124,9 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line",
+                                    "strokeWidth": 1,
+                                    "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#008000"
                                 },
@@ -132,9 +143,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "Social Media Signals | Green: Positive | Red: Negative | Grey: Neutral | Blue: Volume"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Post Volume"}
                                 }
 
                             },
@@ -142,7 +153,9 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line",
+                                    "strokeWidth": 1,
+                                    "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -161,7 +174,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": ""}
                                 }
 
                             },
@@ -169,7 +182,9 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line",
+                                    "strokeWidth": 1,
+                                    "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#DC143C"
                                 },
@@ -188,7 +203,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": ""}
                                 }
 
                             },
@@ -196,7 +211,9 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line",
+                                    "strokeWidth": 1,
+                                    "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -215,7 +232,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": ""}
                                 }
 
                             },
@@ -240,7 +257,9 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line",
+                                    "strokeWidth": 1,
+                                    "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#008000"
                                 },
@@ -257,9 +276,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "News Media Signals | Green: Positive | Red: Negative | Grey: Neutral | Blue: Volume"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Post Volume"}
                                 }
 
                             },
@@ -267,7 +286,9 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line",
+                                    "strokeWidth": 1,
+                                    "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -286,7 +307,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": ""}
                                 }
 
                             },
@@ -294,7 +315,9 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line",
+                                    "strokeWidth": 1,
+                                    "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#DC143C"
                                 },
@@ -313,7 +336,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": ""}
                                 }
 
                             },
@@ -321,7 +344,9 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line",
+                                    "strokeWidth": 1,
+                                    "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -340,7 +365,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": ""}
                                 }
 
                             },
@@ -364,7 +389,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -381,9 +406,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "Social Media Posts Volume | Green: Positive | Grey: 3-Month Moving Average"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             },
@@ -391,7 +416,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#008000"
                                 },
@@ -410,7 +435,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             }
@@ -435,7 +460,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -454,7 +479,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume"}
                                 }
 
                             },
@@ -462,7 +487,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -479,9 +504,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "Social Media Posts Volume | Blue: Neutral | Grey: 3-Month Moving Average"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             }
@@ -506,7 +531,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -523,9 +548,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "Social Media Posts Volume | Red: Negative | Grey: 3-Month Moving Average"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             },
@@ -533,7 +558,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#DC143C"
                                 },
@@ -552,7 +577,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume"}
                                 }
 
                             }
@@ -577,7 +602,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -594,9 +619,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "Social Media Posts Volume | Blue: Total Volume | Grey: 3-Month Moving Average"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             },
@@ -604,7 +629,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -623,7 +648,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             }
@@ -648,7 +673,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -665,9 +690,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "News Media Posts Volume | Green: Positive | Grey: 3-Month Moving Average"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             },
@@ -675,7 +700,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#008000"
                                 },
@@ -694,7 +719,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             }
@@ -719,7 +744,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -736,9 +761,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "News Media Posts Volume | Blue: Neutral | Grey: 3-Month Moving Average"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             },
@@ -746,7 +771,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -765,7 +790,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             }
@@ -790,7 +815,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -807,9 +832,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "News Media Posts Volume | Red: Negative | Grey: 3-Month Moving Average"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             },
@@ -817,7 +842,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#DC143C"
                                 },
@@ -836,7 +861,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             }
@@ -861,7 +886,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -878,9 +903,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "News Media Posts Volume | Blue: Total Volume | Grey: 3-Month Moving Average"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             },
@@ -888,7 +913,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -907,7 +932,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
                                 }
 
                             }
@@ -932,7 +957,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -949,9 +974,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Green: News Media"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             },
@@ -959,7 +984,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#008000"
                                 },
@@ -978,7 +1003,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             }
@@ -1003,7 +1028,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -1020,9 +1045,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Blue: News Media"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             },
@@ -1049,7 +1074,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             }
@@ -1074,7 +1099,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -1091,9 +1116,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Red: News Media"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             },
@@ -1101,7 +1126,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#DC143C"
                                 },
@@ -1120,7 +1145,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             }
@@ -1145,7 +1170,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -1162,9 +1187,9 @@
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
+                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Blue: News Media"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             },
@@ -1172,7 +1197,7 @@
                                 "width": 1100,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -1191,7 +1216,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Net Sentiment"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             }

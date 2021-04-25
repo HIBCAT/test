@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IBHI-Demo Visuals</title>
+    <meta charset="utf-8"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
+
+    <style media="screen">
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<!-- Container for the visualization -->
+<div id="vis1"></div>
+
+
+<script>
+    // Assign the specification to a local variable vlSpec.
+
+    var vlSpec1 = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+        "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/layer_test2.csv"},
+        "transform": [{
+            "window": [{"op": "row_number", "as": "row_number"}]
+        }],
+        "vconcat": [
+            <!--Graph 1-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 1-->
+                                        {
+                        "width": 1100,
+                        "height": 100,
+                        "encoding": {
+                            "x": {
+                                "field": "date",
+                                "type": "temporal",
+                                "title": "year (year)"
+                            }
+                        },
+
+                        "layer": [
+
+                            {
+                                "mark": {
+                                    "type": "line",
+                                    "color": "#000080",
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_std_vol_0_20"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "color": {"field": "attributes", "type": "nominal"},
+                                    "y": {
+                                        "field": "values", "type": "quantitative",
+                                        "axis": {"tickCount": 3, "grid": false}
+                                    },
+
+                                },
+                                "layer": [
+                                    {"mark": "line"},
+                                    {"transform": [{"filter": {"param": "hover", "empty": false}}], "mark": "point"}
+                                ],
+                                "selection": {
+                                    "brush": {"type": "interval", "encodings": ["x"]}
+                                }
+                            },
+
+                            {
+                                "transform": [{"pivot": "attributes", "value": "values", "groupby": ["date"]}],
+                                "mark": "rule",
+
+
+                                "encoding": {
+                                    "opacity": {
+                                        "condition": {"value": 0.3, "param": "hover", "empty": false},
+                                        "value": 0
+                                    },
+                                    "tooltip": true
+                                },
+
+
+                                "params": [{
+                                    "name": "hover",
+                                    "select": {
+                                        "type": "point",
+                                        "fields": ["date"],
+                                        "nearest": true,
+                                        "on": "mouseover",
+                                        "clear": "mouseout"
+                                    }
+                                }]
+                            }
+                        ],
+
+
+                    },
+
+                    {
+                        "width": 1100,
+                        "height": 100,
+                        "encoding": {
+                            "x": {
+                                "field": "date",
+                                "type": "temporal",
+                                "title": "year (year)"
+                            }
+                        },
+
+                        "layer": [
+
+                            {
+                                "mark": {
+                                    "type": "line",
+                                    "color": "#e84a27",
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_std_vol_0_20"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "color": {"field": "attributes", "type": "nominal"},
+                                    "y": {
+                                        "field": "values", "type": "quantitative",
+                                        "axis": {"tickCount": 3, "grid": false}
+                                    },
+
+                                },
+                                "layer": [
+                                    {"mark": "line"},
+                                    {"transform": [{"filter": {"param": "hover", "empty": false}}], "mark": "point"}
+                                ],
+                                "selection": {
+                                    "brush": {"type": "interval", "encodings": ["x"]}
+                                }
+                            },
+
+                            {
+                                "transform": [{"pivot": "attributes", "value": "values", "groupby": ["date"]}],
+                                "mark": "rule",
+
+
+                                "encoding": {
+                                    "opacity": {
+                                        "condition": {"value": 0.3, "param": "hover", "empty": false},
+                                        "value": 0
+                                    },
+                                    "tooltip": true
+                                },
+
+
+                                "params": [{
+                                    "name": "hover",
+                                    "select": {
+                                        "type": "point",
+                                        "fields": ["date"],
+                                        "nearest": true,
+                                        "on": "mouseover",
+                                        "clear": "mouseout"
+                                    }
+                                }]
+                            }
+                        ],
+
+
+                    }
+                ]
+            }
+
+
+        ]
+    };
+
+
+    // Embed the visualization in the container with id `vis`
+    vegaEmbed('#vis1', vlSpec1, {'actions': true});
+
+
+</script>
+</body>
+</html>
