@@ -17,19 +17,15 @@
 </head>
 <body>
 <!-- Container for the visualization -->
-<div id="vis1"></div>
+<div id="vis2"></div>
 
 
 <script>
     // Assign the specification to a local variable vlSpec.
 
-    var vlSpec1 = {
+    var vlSpec2 = {
         "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-        "title": {
-            "text": "United Airlines",
-            "align": "middle",
-            "fontSize": 50
-        },
+
         "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/UnitedAirline.csv"},
         "transform": [{
             "window": [{"op": "row_number", "as": "row_number"}]
@@ -41,11 +37,11 @@
                     <!--Event Details-->
                     <!--Main 1-->
                     {
-                        "width": 1100,
+                        "width": 1500,
                         "height": 100,
                         "mark": {
                             "type": "line",
-                            "strokeWidth": 1,
+                            "strokeWidth": 1.5,
                             "tooltip": true,
                             "color": "#000080"
 
@@ -62,7 +58,7 @@
                             "x": {
                                 "field": "date",
                                 "type": "temporal",
-                                "title": "Blue: Social Media | Orange: News Media| Date"
+                                "title": "Standardized Volume of Daily Posts: Orange: News Media | Blue: Social Media | Date"
                             },
                             "y": {
                                 "field": "values", "type": "quantitative",
@@ -74,11 +70,11 @@
                         }
                     },
                     {
-                        "width": 1100,
+                        "width": 1500,
                         "height": 100,
                         "mark": {
                             "type": "line",
-                            "strokeWidth": 1,
+                            "strokeWidth": 1.5,
 
                             "tooltip": true,
                             "color": "#e84a27",
@@ -98,7 +94,6 @@
                             "x": {
                                 "field": "date",
                                 "type": "temporal",
-                                "title": "year (year)"
                             },
                             "y": {
                                 "field": "values", "type": "quantitative",
@@ -108,141 +103,6 @@
                     }
                 ]
             },
-
-
-
-            <!--Graph 2-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line",
-                                    "strokeWidth": 1,
-                                    "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#008000"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_positive"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "Social Media Signals | Green: Positive | Red: Negative | Grey: Neutral | Blue: Volume"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Post Volume"}
-                                }
-
-                            },
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line",
-                                    "strokeWidth": 1,
-                                    "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_neutral"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": ""}
-                                }
-
-                            },
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line",
-                                    "strokeWidth": 1,
-                                    "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#DC143C"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_negative"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": ""}
-                                }
-
-                            },
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line",
-                                    "strokeWidth": 1,
-                                    "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#0000FF"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_volume"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": ""}
-                                }
-
-                            },
-
-
-                        ]
-                    }
-                ]
-            },
-
 
             <!--Graph 3-->
             {
@@ -254,11 +114,11 @@
                         "layer": [
 
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
                                     "type": "line",
-                                    "strokeWidth": 1,
+                                    "strokeWidth": 1.5,
                                     "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#008000"
@@ -283,11 +143,11 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
                                     "type": "line",
-                                    "strokeWidth": 1,
+                                    "strokeWidth": 1.5,
                                     "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
@@ -312,11 +172,11 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
                                     "type": "line",
-                                    "strokeWidth": 1,
+                                    "strokeWidth": 1.5,
                                     "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#DC143C"
@@ -341,11 +201,11 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
                                     "type": "line",
-                                    "strokeWidth": 1,
+                                    "strokeWidth": 1.5,
                                     "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
@@ -376,290 +236,6 @@
                 ]
             },
 
-            <!--Graph 4-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_3ma_positive"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "Social Media Posts Volume | Green: Positive | Grey: 3-Month Moving Average"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            },
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#008000"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_positive"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            }
-
-
-
-                        ]
-                    }
-                ]
-            },
-
-            <!--Graph 5-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_3ma_neutral"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume"}
-                                }
-
-                            },
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#0000FF"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_neutral"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "Social Media Posts Volume | Blue: Neutral | Grey: 3-Month Moving Average"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            }
-
-
-
-                        ]
-                    }
-                ]
-            },
-
-            <!--Graph 6-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_3ma_negative"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "Social Media Posts Volume | Red: Negative | Grey: 3-Month Moving Average"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            },
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#DC143C"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_negative"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume"}
-                                }
-
-                            }
-
-
-
-                        ]
-                    }
-                ]
-            },
-
-            <!--Graph 7-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_3ma_volume"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "Social Media Posts Volume | Blue: Total Volume | Grey: 3-Month Moving Average"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            },
-                            {
-                                "width": 1100,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#0000FF"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_volume"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            }
-
-
-
-                        ]
-                    }
-                ]
-            },
-
             <!--Graph 8-->
             {
                 "layer": [
@@ -670,10 +246,10 @@
                         "layer": [
 
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -697,10 +273,10 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#008000"
                                 },
@@ -741,10 +317,10 @@
                         "layer": [
 
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -768,10 +344,10 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -812,10 +388,10 @@
                         "layer": [
 
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -839,10 +415,10 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#DC143C"
                                 },
@@ -883,10 +459,10 @@
                         "layer": [
 
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -910,10 +486,10 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -954,10 +530,10 @@
                         "layer": [
 
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -981,10 +557,10 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#008000"
                                 },
@@ -1025,10 +601,10 @@
                         "layer": [
 
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -1052,7 +628,7 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
                                     "type": "line", "interpolate": "monotone",
@@ -1096,10 +672,10 @@
                         "layer": [
 
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -1123,10 +699,10 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#DC143C"
                                 },
@@ -1167,10 +743,10 @@
                         "layer": [
 
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#95A5A6"
                                 },
@@ -1194,10 +770,10 @@
 
                             },
                             {
-                                "width": 1100,
+                                "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1, "interpolate": "monotone",
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
                                     "color": "#0000FF"
                                 },
@@ -1222,6 +798,137 @@
                             }
 
 
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 2-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line",
+                                    "strokeWidth": 1.5,
+                                    "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#008000"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_positive"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "Social Media Signals | Green: Positive | Red: Negative | Grey: Neutral | Blue: Volume"}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Post Volume"}
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line",
+                                    "strokeWidth": 1.5,
+                                    "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_neutral"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": ""}
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line",
+                                    "strokeWidth": 1.5,
+                                    "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#DC143C"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_negative"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": ""}
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line",
+                                    "strokeWidth": 1.5,
+                                    "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_volume"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": ""}
+                                }
+
+                            },
+
 
                         ]
                     }
@@ -1229,7 +936,309 @@
             },
 
 
+            <!--Graph 4-->
+            {
+                "layer": [
+                    <!--Event Details-->
 
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_positive"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "Social Media Posts Volume | Green: Positive | Grey: 3-Month Moving Average"}
+                                    },
+                                    "y": {
+                                        "field": "values",
+                                        "type": "quantitative",
+                                        "title": "Volume, 3-Month Moving Average"
+                                    }
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#008000"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_positive"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {
+                                        "field": "values",
+                                        "type": "quantitative",
+                                        "title": "Volume, 3-Month Moving Average"
+                                    }
+                                }
+
+                            }
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 5-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_neutral"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume"}
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_neutral"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "Social Media Posts Volume | Blue: Neutral | Grey: 3-Month Moving Average"}
+                                    },
+                                    "y": {
+                                        "field": "values",
+                                        "type": "quantitative",
+                                        "title": "Volume, 3-Month Moving Average"
+                                    }
+                                }
+
+                            }
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 6-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_negative"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "Social Media Posts Volume | Red: Negative | Grey: 3-Month Moving Average"}
+                                    },
+                                    "y": {
+                                        "field": "values",
+                                        "type": "quantitative",
+                                        "title": "Volume, 3-Month Moving Average"
+                                    }
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#DC143C"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_negative"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume"}
+                                }
+
+                            }
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 7-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_volume"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "Social Media Posts Volume | Blue: Total Volume | Grey: 3-Month Moving Average"}
+                                    },
+                                    "y": {
+                                        "field": "values",
+                                        "type": "quantitative",
+                                        "title": "Volume, 3-Month Moving Average"
+                                    }
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_volume"]
+                                        }
+                                    }
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {
+                                        "field": "values",
+                                        "type": "quantitative",
+                                        "title": "Volume, 3-Month Moving Average"
+                                    }
+                                }
+
+                            }
+
+
+                        ]
+                    }
+                ]
+            },
 
 
         ],
@@ -1239,7 +1248,7 @@
 
 
     // Embed the visualization in the container with id `vis`
-    vegaEmbed('#vis1', vlSpec1, {'actions': true});
+    vegaEmbed('#vis2', vlSpec2, {'actions': true});
 
 
 </script>
