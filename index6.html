@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IBHI-Demo Visuals</title>
+    <meta charset="utf-8"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+
+    <style media="screen">
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<!-- Container for the visualization -->
+<div id="vis1"></div>
+
+
+<script>
+    // Assign the specification to a local variable vlSpec.
+
+    var vlSpec1 = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "description": "Drag a rectangular brush to show (first 20) selected points in a table.",
+        "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/feature_4_april_25.csv"},
+        "transform": [{
+            "window": [{"op": "row_number", "as": "row_number"}]
+        }],
+        "vconcat": [
+
+            {
+                "width": 1301,
+                "height": 500,
+                "params": [{
+                    "name": "brush",
+                    "select": "interval"
+                }],
+                "mark": {"type": "circle", "tooltip": true, "clip": true},
+                "encoding": {
+                    "x": {"field": "publication_date_only", "type": "temporal", "title": "Date"},
+                    "y": {"field": "bing_liu_pos", "type": "quantitative", "aggregate": "count"},
+                    "size": {"value": 150},
+                    "color": {
+                        "condition": {
+                            "param": "brush",
+                            "field": "bing_liu_net_sentiment",
+                            "type": "ordinal",
+                            "title": "Net Sentiment"
+                        },
+                        "value": "lightgray"
+                    }
+                }
+            },
+
+
+            {
+
+                "transform": [
+                    {"filter": {"param": "brush"}},
+                    {"window": [{"op": "rank", "as": "rank"}]},
+                    {"filter": {"field": "rank", "lt": 100}}
+                ],
+
+
+                "hconcat": [
+
+
+                    {
+                        "width": 100,
+                        "title": "Date",
+                        "mark": "text",
+                        "encoding": {
+                            "text": {"field": "publication_date_only", "type": "temporal"},
+                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+                        }
+                    },
+
+                    {
+                        "width": 1000,
+                        "title": "News Headline",
+                        "mark": "text",
+                        "encoding": {
+                            "text": {"field": "title", "type": "nominal"},
+                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+                        }
+                    },
+
+
+                    {
+                        "width": 70,
+                        "title": "% Positive",
+                        "mark": "text",
+                        "encoding": {
+                            "text": {"field": "bing_liu_pos", "type": "nominal"},
+                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+                        }
+                    },
+                    {
+                        "width": 70,
+                        "title": "% Negative",
+                        "mark": "text",
+                        "encoding": {
+                            "text": {"field": "bing_liu_neg", "type": "nominal"},
+                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+                        }
+                    }
+                ]
+            }
+
+        ],
+        "resolve": {"legend": {"color": "independent"}}
+    };
+
+
+    // Embed the visualization in the container with id `vis`
+    vegaEmbed('#vis1', vlSpec1, {'actions': true});
+
+
+</script>
+</body>
+</html>
