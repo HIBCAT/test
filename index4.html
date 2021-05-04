@@ -33,78 +33,120 @@
         "vconcat": [
             <!--Graph 1-->
             {
-                "layer": [
-                    <!--Event Details-->
-                    <!--Main 1-->
-                    {
-                        "width": 1500,
-                        "height": 100,
-                        "mark": {
-                            "type": "line",
-                            "strokeWidth": 1.5,
-                            "tooltip": true,
-                            "color": "#000080"
+                "hconcat": [
 
-                        },
-                        "transform": [
+                    {
+                        "layer": [
+                            <!--Event Details-->
+                            <!--Main 1-->
                             {
-                                "filter": {
-                                    "field": "attributes",
-                                    "oneOf": ["bw_3ma_volume_std_0_100"]
+                                "width": 1500,
+                                "height": 100,
+                                "mark": {
+                                    "type": "line",
+                                    "strokeWidth": 1.5,
+                                    "tooltip": true,
+                                    "color": "#000080"
+
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_volume_std_0_100"]
+                                        }
+                                    }
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "title": "Standardized Volume of Daily Posts: Orange: News Media | Blue: Social Media | Date"
+                                    },
+                                    "y": {
+                                        "field": "values", "type": "quantitative",
+                                        "axis": {
+                                            "tickCount": 3, "grid": false,
+                                            "title": "Standardized Volume"
+                                        }
+                                    }
                                 }
-                            }
-                        ],
-                        "encoding": {
-                            "x": {
-                                "field": "date",
-                                "type": "temporal",
-                                "title": "Standardized Volume of Daily Posts: Orange: News Media | Blue: Social Media | Date"
                             },
-                            "y": {
-                                "field": "values", "type": "quantitative",
-                                "axis": {
-                                    "tickCount": 3, "grid": false,
-                                    "title": "Standardized Volume"
+                            {
+                                "width": 1500,
+                                "height": 100,
+                                "mark": {
+                                    "type": "line",
+                                    "strokeWidth": 1.5,
+
+                                    "tooltip": true,
+                                    "color": "#e84a27",
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_volume_std_0_100"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "selection": {
+                                    "brush": {"type": "interval", "encodings": ["x"]}
+                                },
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                    },
+                                    "y": {
+                                        "field": "values", "type": "quantitative",
+                                        "axis": {"tickCount": 3, "grid": false}
+                                    },
                                 }
                             }
-                        }
+                        ]
                     },
-                    {
-                        "width": 1500,
-                        "height": 100,
-                        "mark": {
-                            "type": "line",
-                            "strokeWidth": 1.5,
 
-                            "tooltip": true,
-                            "color": "#e84a27",
-                        },
-                        "transform": [
-                            {
-                                "filter": {
-                                    "field": "attributes",
-                                    "oneOf": ["cc_3ma_volume_std_0_100"]
-                                }
-                            }
-                        ],
-                        "selection": {
-                            "brush": {"type": "interval", "encodings": ["x"]}
-                        },
+
+                    {
+                        "mark": {"type": "bar", "size": 150},
+                        "title": "Brands (Select One)",
                         "encoding": {
-                            "x": {
-                                "field": "date",
-                                "type": "temporal",
+                            "color": {
+                                "condition": {
+                                    "type": "nominal",
+                                    "field": "brand",
+                                    "legend": null,
+                                    "selection": "brand_legend"
+                                },
+                                "value": "lightgray"
                             },
                             "y": {
-                                "field": "values", "type": "quantitative",
-                                "axis": {"tickCount": 3, "grid": false}
-                            },
+                                "type": "nominal", "field":
+                                    "brand", "title": null
+                            }
+                        },
+                        "selection": {
+                            "brand_legend": {
+                                "type": "multi",
+                                "encodings": ["color"],
+                                "on": "click",
+                                "toggle": "event.shiftKey",
+                                "resolve": "global",
+                                "empty": "all"
+                            }
                         }
                     }
+
+
                 ]
             },
 
-            <!--Graph 3-->
+
+            <!--Graph 2-->
             {
                 "layer": [
                     <!--Event Details-->
@@ -129,7 +171,9 @@
                                             "field": "attributes",
                                             "oneOf": ["cc_positive"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -158,7 +202,9 @@
                                             "field": "attributes",
                                             "oneOf": ["cc_neutral"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -187,7 +233,9 @@
                                             "field": "attributes",
                                             "oneOf": ["cc_negative"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -216,7 +264,9 @@
                                             "field": "attributes",
                                             "oneOf": ["cc_volume"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -229,6 +279,381 @@
                                 }
 
                             },
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 3-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_positive"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "News Media Posts Volume | Green: Positive | Grey: 3-Month Moving Average"}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#008000"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_positive"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 4-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_neutral"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "News Media Posts Volume | Blue: Neutral | Grey: 3-Month Moving Average"}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_neutral"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 5-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_negative"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "News Media Posts Volume | Red: Negative | Grey: 3-Month Moving Average"}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#DC143C"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_negative"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 6-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_volume"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "News Media Posts Volume | Blue: Total Volume | Grey: 3-Month Moving Average"}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#0000FF"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_volume"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                }
+
+                            }
+
+
+
+                        ]
+                    }
+                ]
+            },
+
+            <!--Graph 7-->
+            {
+                "layer": [
+                    <!--Event Details-->
+
+                    <!--Main 4-->
+                    {
+                        "layer": [
+
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#95A5A6"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["bw_3ma_positive_std_0_100"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Green: News Media"}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
+                                }
+
+                            },
+                            {
+                                "width": 1500,
+                                "height": 400,
+                                "mark": {
+                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "tooltip": true,
+                                    "color": "#008000"
+                                },
+                                "transform": [
+                                    {
+                                        "filter": {
+                                            "field": "attributes",
+                                            "oneOf": ["cc_3ma_positive_std_0_100"]
+                                        }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
+                                ],
+                                "encoding": {
+                                    "x": {
+                                        "field": "date",
+                                        "type": "temporal",
+                                        "scale": {"domain": {"selection": "brush"}},
+                                        "axis": {"title": ""}
+                                    },
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
+                                }
+
+                            }
+
 
 
                         ]
@@ -257,18 +682,20 @@
                                     {
                                         "filter": {
                                             "field": "attributes",
-                                            "oneOf": ["cc_3ma_positive"]
+                                            "oneOf": ["bw_3ma_neutral_std_0_100"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "News Media Posts Volume | Green: Positive | Grey: 3-Month Moving Average"}
+                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Blue: News Media"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             },
@@ -276,17 +703,19 @@
                                 "width": 1500,
                                 "height": 400,
                                 "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
+                                    "type": "line", "interpolate": "monotone",
                                     "tooltip": true,
-                                    "color": "#008000"
+                                    "color": "#0000FF"
                                 },
                                 "transform": [
                                     {
                                         "filter": {
                                             "field": "attributes",
-                                            "oneOf": ["cc_positive"]
+                                            "oneOf": ["cc_3ma_neutral_std_0_100"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -295,7 +724,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             }
@@ -328,18 +757,20 @@
                                     {
                                         "filter": {
                                             "field": "attributes",
-                                            "oneOf": ["cc_3ma_neutral"]
+                                            "oneOf": ["bw_3ma_negative_std_0_100"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
                                         "field": "date",
                                         "type": "temporal",
                                         "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "News Media Posts Volume | Blue: Neutral | Grey: 3-Month Moving Average"}
+                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Red: News Media"}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             },
@@ -349,15 +780,17 @@
                                 "mark": {
                                     "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
                                     "tooltip": true,
-                                    "color": "#0000FF"
+                                    "color": "#DC143C"
                                 },
                                 "transform": [
                                     {
                                         "filter": {
                                             "field": "attributes",
-                                            "oneOf": ["cc_neutral"]
+                                            "oneOf": ["cc_3ma_negative_std_0_100"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -366,7 +799,7 @@
                                         "scale": {"domain": {"selection": "brush"}},
                                         "axis": {"title": ""}
                                     },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
+                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
                                 }
 
                             }
@@ -399,364 +832,11 @@
                                     {
                                         "filter": {
                                             "field": "attributes",
-                                            "oneOf": ["cc_3ma_negative"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "News Media Posts Volume | Red: Negative | Grey: 3-Month Moving Average"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            },
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#DC143C"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["cc_negative"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            }
-
-
-
-                        ]
-                    }
-                ]
-            },
-
-            <!--Graph 11-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["cc_3ma_volume"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "News Media Posts Volume | Blue: Total Volume | Grey: 3-Month Moving Average"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            },
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#0000FF"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["cc_volume"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Volume, 3-Month Moving Average"}
-                                }
-
-                            }
-
-
-
-                        ]
-                    }
-                ]
-            },
-
-            <!--Graph 12-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_3ma_positive_std_0_100"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Green: News Media"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
-                                }
-
-                            },
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#008000"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["cc_3ma_positive_std_0_100"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
-                                }
-
-                            }
-
-
-
-                        ]
-                    }
-                ]
-            },
-
-            <!--Graph 13-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_3ma_neutral_std_0_100"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Blue: News Media"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
-                                }
-
-                            },
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#0000FF"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["cc_3ma_neutral_std_0_100"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
-                                }
-
-                            }
-
-
-
-                        ]
-                    }
-                ]
-            },
-
-            <!--Graph 14-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["bw_3ma_negative_std_0_100"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": "Scale: 0 to 100 | Grey: Social Media | Red: News Media"}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
-                                }
-
-                            },
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#DC143C"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
-                                            "oneOf": ["cc_3ma_negative_std_0_100"]
-                                        }
-                                    }
-                                ],
-                                "encoding": {
-                                    "x": {
-                                        "field": "date",
-                                        "type": "temporal",
-                                        "scale": {"domain": {"selection": "brush"}},
-                                        "axis": {"title": ""}
-                                    },
-                                    "y": {"field": "values", "type": "quantitative", "title": "Standardized Volume, Social Media & News Media"}
-                                }
-
-                            }
-
-
-
-                        ]
-                    }
-                ]
-            },
-
-            <!--Graph 15-->
-            {
-                "layer": [
-                    <!--Event Details-->
-
-                    <!--Main 4-->
-                    {
-                        "layer": [
-
-                            {
-                                "width": 1500,
-                                "height": 400,
-                                "mark": {
-                                    "type": "line", "strokeWidth": 1.5, "interpolate": "monotone",
-                                    "tooltip": true,
-                                    "color": "#95A5A6"
-                                },
-                                "transform": [
-                                    {
-                                        "filter": {
-                                            "field": "attributes",
                                             "oneOf": ["bw_3ma_volume_std_0_100"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -783,7 +863,9 @@
                                             "field": "attributes",
                                             "oneOf": ["cc_3ma_volume_std_0_100"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -803,7 +885,7 @@
                 ]
             },
 
-            <!--Graph 2-->
+            <!--Graph 11-->
             {
                 "layer": [
                     <!--Event Details-->
@@ -828,7 +910,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_positive"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -857,7 +941,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_neutral"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -886,7 +972,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_negative"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -915,7 +1003,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_volume"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -936,7 +1026,7 @@
             },
 
 
-            <!--Graph 4-->
+            <!--Graph 12-->
             {
                 "layer": [
                     <!--Event Details-->
@@ -959,7 +1049,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_3ma_positive"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -990,7 +1082,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_positive"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -1014,7 +1108,7 @@
                 ]
             },
 
-            <!--Graph 5-->
+            <!--Graph 13-->
             {
                 "layer": [
                     <!--Event Details-->
@@ -1037,7 +1131,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_3ma_neutral"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -1064,7 +1160,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_neutral"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -1088,7 +1186,7 @@
                 ]
             },
 
-            <!--Graph 6-->
+            <!--Graph 14-->
             {
                 "layer": [
                     <!--Event Details-->
@@ -1111,7 +1209,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_3ma_negative"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -1142,7 +1242,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_negative"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -1162,7 +1264,7 @@
                 ]
             },
 
-            <!--Graph 7-->
+            <!--Graph 15-->
             {
                 "layer": [
                     <!--Event Details-->
@@ -1185,7 +1287,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_3ma_volume"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {
@@ -1216,7 +1320,9 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_volume"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
+
                                 ],
                                 "encoding": {
                                     "x": {

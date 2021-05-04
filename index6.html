@@ -21,15 +21,15 @@
 </head>
 <body>
 <!-- Container for the visualization -->
-<div id="vis1"></div>
+<div id="vis3"></div>
 
 
 <script>
     // Assign the specification to a local variable vlSpec.
 
-    var vlSpec1 = {
+    var vlSpec3 = {
         "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "description": "Drag a rectangular brush to show (first 20) selected points in a table.",
+        "description": "Drag a rectangular brush to show (first 100) selected points in a table.",
         "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/feature_4_april_25.csv"},
         "transform": [{
             "window": [{"op": "row_number", "as": "row_number"}]
@@ -38,26 +38,78 @@
         "vconcat": [
 
             {
-                "width": 1500,
-                "height": 100,
-                "mark": {"type": "line", "tooltip": true, "color": "#e84a27"},
-                "selection": {"brush_volume": {"type": "interval", "encodings": ["x"]}},
-                "encoding": {
-                    "x": {
-                        "field": "publication_date_only",
-                        "type": "temporal",
-                        "title": "       Volume of Daily Posts (Orange: News Media)"
+                "hconcat": [
+
+
+                    {
+                        "title": {
+                            "text": "Step 1: Please click and drag inside the first graph's area",
+                            "fontSize": 15,
+                            "anchor": "start"
+                        },
+
+                        "width": 1300,
+                        "height": 100,
+                        "mark": {"type": "line", "tooltip": true, "color": "#e84a27"},
+                        "transform": [
+                            {"filter": {"selection": "brand_legend"}}
+
+                        ],
+                        "selection": {"brush_volume": {"type": "interval", "encodings": ["x"]}},
+                        "encoding": {
+                            "x": {
+                                "field": "publication_date_only",
+                                "type": "temporal",
+                                "title": "       Volume of Daily Posts (Orange: News Media)"
+                            },
+                            "y": {
+                                "field": "cc_volume",
+                                "type": "quantitative",
+                                "axis": {"tickCount": 3, "grid": false}
+                            }
+                        }
                     },
-                    "y": {
-                        "field": "cc_volume",
-                        "type": "quantitative",
-                        "axis": {"tickCount": 3, "grid": false}
+
+                    {
+                        "mark": {"type": "bar", "size": 150},
+                        "title": "Brands (Select One)",
+                        "encoding": {
+                            "color": {
+                                "condition": {
+                                    "type": "nominal",
+                                    "field": "brand",
+                                    "legend": null,
+                                    "selection": "brand_legend"
+                                },
+                                "value": "lightgray"
+                            },
+                            "y": {
+                                "type": "nominal", "field":
+                                    "brand", "title": null
+                            }
+                        },
+                        "selection": {
+                            "brand_legend": {
+                                "type": "multi",
+                                "encodings": ["color"],
+                                "on": "click",
+                                "toggle": "event.shiftKey",
+                                "resolve": "global",
+                                "empty": "all"
+                            }
+                        }
                     }
-                }
+
+                ]
             },
 
 
             {
+                "title": {
+                    "text": "Step 2: Please click and drag inside the second graph's area",
+                    "fontSize": 15,
+                    "anchor": "start"
+                },
                 "width": 1301,
                 "height": 500,
                 "params": [{
@@ -65,6 +117,10 @@
                     "select": "interval"
                 }],
                 "mark": {"type": "circle", "tooltip": true, "clip": true},
+                "transform": [
+                    {"filter": {"selection": "brand_legend"}}
+
+                ],
                 "encoding": {
                     "x": {
                         "field": "publication_date_only", "type": "temporal", "title": "Date",
@@ -107,15 +163,7 @@
                         }
                     },
 
-                    {
-                        "width": 1000,
-                        "title": "News Headline",
-                        "mark": "text",
-                        "encoding": {
-                            "text": {"field": "title", "type": "nominal"},
-                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
-                        }
-                    },
+
 
 
                     {
@@ -135,6 +183,26 @@
                             "text": {"field": "bing_liu_neg", "type": "nominal"},
                             "y": {"field": "row_number", "type": "ordinal", "axis": null}
                         }
+                    },
+
+                    {
+                        "width": 70,
+                        "title": "Brand",
+                        "mark": "text",
+                        "encoding": {
+                            "text": {"field": "brand", "type": "nominal"},
+                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+                        }
+                    },
+
+                    {
+                        "width": 1000,
+                        "title": "News Headline",
+                        "mark": "text",
+                        "encoding": {
+                            "text": {"field": "title", "type": "nominal"},
+                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+                        }
                     }
                 ]
             }
@@ -145,7 +213,7 @@
 
 
     // Embed the visualization in the container with id `vis`
-    vegaEmbed('#vis1', vlSpec1, {'actions': true});
+    vegaEmbed('#vis3', vlSpec3, {'actions': true});
 
 
 </script>

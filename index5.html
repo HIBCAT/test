@@ -25,19 +25,23 @@
 
     var vlSpec1 = {
         "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-        "data": {
-            "url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/legend_selector_feature1.csv"
-        },
+        "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/legend_selector_feature1.csv"},
         "transform": [{"window": [{"op": "row_number", "as": "row_number"}]}],
         "vconcat": [
+
             {
+                "hconcat": [
+
+                    {
                 "layer": [
                     {
+                        "title": {"text": "Step 1: Please click and drag inside the first graph's area", "fontSize": 15, "anchor": "start"},
                         "width": 1500,
                         "height": 100,
                         "mark": {"type": "line", "strokeWidth": 1.5, "tooltip": true, "color": "#000080"},
                         "transform": [
-                            {"filter": {"field": "attributes", "oneOf": ["bw_std_vol_0_20"]}}
+                            {"filter": {"field": "attributes", "oneOf": ["bw_std_vol_0_20"]}},
+                            {"filter": {"selection": "brand_legend"}}
                         ],
                         "encoding": {
                             "x": {"field": "date", "type": "temporal", "title": "Date"},
@@ -57,7 +61,8 @@
                         "height": 100,
                         "mark": {"type": "line", "strokeWidth": 1.5, "tooltip": true, "color": "#e84a27"},
                         "transform": [
-                            {"filter": {"field": "attributes", "oneOf": ["cc_std_vol_0_20"]}}
+                            {"filter": {"field": "attributes", "oneOf": ["cc_std_vol_0_20"]}},
+                            {"filter": {"selection": "brand_legend"}}
                         ],
                         "selection": {"brush": {"type": "interval", "encodings": ["x"]}},
                         "encoding": {
@@ -71,6 +76,38 @@
                     }
                 ]
             },
+                    {
+                        "mark": {"type": "bar", "size": 150},
+                        "title": "Brands (Select One)",
+                        "encoding": {
+                            "color": {
+                                "condition": {
+                                    "type": "nominal",
+                                    "field": "brand",
+                                    "legend": null,
+                                    "selection": "brand_legend"
+                                },
+                                "value": "lightgray"
+                            },
+                            "y": {
+                                "type": "nominal", "field":
+                                    "brand", "title": null
+                            }
+                        },
+                        "selection": {
+                            "brand_legend": {
+                                "type": "multi",
+                                "encodings": ["color"],
+                                "on": "click",
+                                "toggle": "event.shiftKey",
+                                "resolve": "global",
+                                "empty": "all"
+                            }
+                        }
+                    }
+                ]
+            },
+
             {
                 "layer": [
                     {
@@ -78,7 +115,9 @@
                         "height": 100,
                         "mark": {"type": "line", "strokeWidth": 1.5, "tooltip": true, "color": "#e84a27"},
                         "transform": [
-                            {"filter": {"field": "attributes", "oneOf": ["cc_volume"]}}
+                            {"filter": {"field": "attributes", "oneOf": ["cc_volume"]}},
+                            {"filter": {"selection": "brand_legend"}}
+
                         ],
                         "encoding": {
                             "x": {
@@ -115,7 +154,8 @@
                                             "field": "attributes",
                                             "oneOf": ["cc_net_senti_0_100"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
                                 ],
                                 "encoding": {
                                     "x": {
@@ -141,7 +181,8 @@
                                     "color": "#95A5A6"
                                 },
                                 "transform": [
-                                    {"filter": {"field": "attributes", "oneOf": ["cc_vwas"]}}
+                                    {"filter": {"field": "attributes", "oneOf": ["cc_vwas"]}},
+                                    {"filter": {"selection": "brand_legend"}}
                                 ],
                                 "encoding": {
                                     "x": {
@@ -172,7 +213,8 @@
                                             "field": "attributes",
                                             "oneOf": ["cc_std_vol_0_20"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
                                 ],
                                 "encoding": {
                                     "x": {
@@ -201,7 +243,8 @@
                         "height": 100,
                         "mark": {"type": "line", "strokeWidth": 1.5, "tooltip": true, "color": "#000080"},
                         "transform": [
-                            {"filter": {"field": "attributes", "oneOf": ["bw_volume"]}}
+                            {"filter": {"field": "attributes", "oneOf": ["bw_volume"]}},
+                            {"filter": {"selection": "brand_legend"}}
                         ],
                         "encoding": {
                             "x": {
@@ -238,7 +281,8 @@
                                             "field": "attributes",
                                             "oneOf": ["bw_net_senti_0_100"]
                                         }
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
                                 ],
                                 "encoding": {
                                     "x": {
@@ -264,7 +308,8 @@
                                     "color": "#95A5A6"
                                 },
                                 "transform": [
-                                    {"filter": {"field": "attributes", "oneOf": ["bw_vwas"]}}
+                                    {"filter": {"field": "attributes", "oneOf": ["bw_vwas"]}},
+                                    {"filter": {"selection": "brand_legend"}}
                                 ],
                                 "encoding": {
                                     "x": {
@@ -297,7 +342,8 @@
                                         },
                                         "calculate": "{'bw_std_vol_0_20': 'Social Media Standard Volume (Scale 0 to 20)'}[datum.attributes]",
                                         "as": "attributes"
-                                    }
+                                    },
+                                    {"filter": {"selection": "brand_legend"}}
                                 ],
                                 "encoding": {
                                     "x": {
