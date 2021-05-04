@@ -28,120 +28,228 @@
     // Assign the specification to a local variable vlSpec.
 
     var vlSpec1 = {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "description": "Drag a rectangular brush to show (first 20) selected points in a table.",
-        "data": {"url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/feature_4_april_25.csv"},
-        "transform": [{
-            "window": [{"op": "row_number", "as": "row_number"}]
-        }],
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/HIBCAT/test/main/test_data/feature_4_may_04.csv"
+  },
+                                "title": {"text": "Daily AD Investment Required To Overcome the Negative Sentiment Against the Brand ", "fontSize": 15, "anchor": "middle"},
 
-        "vconcat": [
+  "transform": [{"window": [{"op": "row_number", "as": "row_number"}]}],
+  "vconcat": [
+      {
+        "hconcat": [
 
-            {
-                "width": 1500,
-                "height": 100,
-                "mark": {"type": "line", "tooltip": true, "color": "#e84a27"},
-                "selection": {"brush_volume": {"type": "interval", "encodings": ["x"]}},
-                "encoding": {
-                    "x": {
-                        "field": "publication_date_only",
-                        "type": "temporal",
-                        "title": "       Volume of Daily Posts (Orange: News Media)"
-                    },
-                    "y": {
-                        "field": "cc_volume",
-                        "type": "quantitative",
-                        "axis": {"tickCount": 3, "grid": false}
-                    }
-                }
-            },
-
-
-            {
-                "width": 1301,
-                "height": 500,
-                "params": [{
-                    "name": "brush",
-                    "select": "interval"
-                }],
-                "mark": {"type": "circle", "tooltip": true, "clip": true},
-                "encoding": {
-                    "x": {
-                        "field": "publication_date_only", "type": "temporal", "title": "Date",
-                        "scale": {"domain": {"selection": "brush_volume"}},
-                    },
-                    "y": {"field": "bing_liu_pos", "type": "quantitative", "aggregate": "count"},
-                    "size": {"value": 150},
-                    "color": {
-                        "condition": {
-                            "param": "brush",
-                            "field": "bing_liu_net_sentiment",
-                            "type": "ordinal",
-                            "title": "Net Sentiment"
+    {
+      "mark": {"type": "bar", "size": 150},
+      "title": "Brands (Select One)",
+      "encoding": {
+                            "color": {
+                                "condition": {
+                                    "type": "nominal",
+                                    "field": "brand",
+                                    "legend": null,
+                                    "selection": "brand_legend"
+                                },
+                                "value": "lightgray"
+                            },
+                            "y": {
+                                "type": "nominal", "field":
+                                    "brand", "title": null
+                            }
                         },
-                        "value": "lightgray"
-                    }
-                }
+      "selection": {
+                            "brand_legend": {
+                                "type": "multi",
+                                "encodings": ["color"],
+                                "on": "click",
+                                "toggle": "event.shiftKey",
+                                "resolve": "global",
+                                "empty": "all"
+                            }
+                        }
+      },
+
+    {
+      "layer": [
+        {
+          "width": 1320,
+          "height": 100,
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5,
+            "tooltip": true,
+            "color": "#000080"
+          },
+          "transform": [
+            {"filter": {"selection": "brand_legend"}}
+
+          ],
+          "selection": {
+            "brush": {"type": "interval", "encodings": ["x"]},
+            "brand_legend": {
+                                "type": "multi",
+                                "encodings": ["color"],
+                                "on": "click",
+                                "toggle": "event.shiftKey",
+                                "resolve": "global",
+                                "empty": "all"
+                            }
             },
-
-
-            {
-
-                "transform": [
-                    {"filter": {"param": "brush"}},
-                    {"window": [{"op": "rank", "as": "rank"}]},
-                    {"filter": {"field": "rank", "lt": 100}}
-                ],
-
-
-                "hconcat": [
-
-
-                    {
-                        "width": 100,
-                        "title": "Date",
-                        "mark": "text",
-                        "encoding": {
-                            "text": {"field": "publication_date_only", "type": "temporal"},
-                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
-                        }
-                    },
-
-                    {
-                        "width": 1000,
-                        "title": "News Headline",
-                        "mark": "text",
-                        "encoding": {
-                            "text": {"field": "title", "type": "nominal"},
-                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
-                        }
-                    },
-
-
-                    {
-                        "width": 70,
-                        "title": "% Positive",
-                        "mark": "text",
-                        "encoding": {
-                            "text": {"field": "bing_liu_pos", "type": "nominal"},
-                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
-                        }
-                    },
-                    {
-                        "width": 70,
-                        "title": "% Negative",
-                        "mark": "text",
-                        "encoding": {
-                            "text": {"field": "bing_liu_neg", "type": "nominal"},
-                            "y": {"field": "row_number", "type": "ordinal", "axis": null}
-                        }
-                    }
-                ]
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "title": "       Daily Social Media Posts"
+            },
+            "y": {
+				"title": "Volume",
+              "field": "bw_volume",
+              "type": "quantitative",
+              "axis": {"tickCount": 3, "grid": false}
             }
+          }
+        }
+      ]
+      }
 
-        ],
-        "resolve": {"legend": {"color": "independent"}}
-    };
+
+
+
+        ]
+      },
+
+	  {
+		  "layer": [
+
+			      {
+      "layer": [
+
+		        {
+          "width": 1500,
+          "height": 200,
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5,
+            "tooltip": true,
+            "color": "#008000"
+          },
+          "transform": [
+            {"filter": {"selection": "brand_legend"}},
+			{"filter": {"selection": "brush"}}
+
+          ],
+
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "title": "       Post Type | Green: Positive | Grey: Neutral | Red: Negative "
+            },
+            "y": {
+              "field": "bw_positive",
+			  "title": null,
+              "type": "quantitative",
+              "axis": {"tickCount": 3, "grid": false}
+            }
+          }
+        },
+
+				        {
+          "width": 1500,
+          "height": 200,
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5,
+            "tooltip": true,
+            "color": "#DC143C"
+          },
+          "transform": [
+            {"filter": {"selection": "brand_legend"}},
+			{"filter": {"selection": "brush"}}
+
+          ],
+
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "title": "       Post Type | Green: Positive | Grey: Neutral | Red: Negative "
+            },
+            "y": {
+              "field": "bw_negative",
+			  "title": null,
+              "type": "quantitative",
+              "axis": {"tickCount": 3, "grid": false}
+            }
+          }
+        },
+						        {
+          "width": 1500,
+          "height": 200,
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5,
+            "tooltip": true,
+            "color": "#95A5A6"
+          },
+          "transform": [
+            {"filter": {"selection": "brand_legend"}},
+			{"filter": {"selection": "brush"}}
+
+          ],
+
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "title": "       Post Type | Green: Positive | Grey: Neutral | Red: Negative "
+            },
+            "y": {
+              "field": "bw_neutral",
+			  "title": null,
+              "type": "quantitative",
+              "axis": {"tickCount": 3, "grid": false}
+            }
+          }
+        }
+      ]
+      }
+
+		  ]
+	  }	,
+
+	    {
+          "width": 1500,
+          "height": 400,
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5,
+            "tooltip": true,
+            "color": "#000080"
+          },
+          "transform": [
+            {"filter": {"selection": "brand_legend"}},
+			{"filter": {"selection": "brush"}}
+
+          ],
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "title": "       Daily Promotional Investment To Overcome Negative Sentiment"
+            },
+            "y": {
+
+              "field": "investment_estimate",
+			  "title": "Daily AD Investment in USD",
+              "type": "quantitative",
+              "axis": {"tickCount": 3, "grid": false}
+            }
+          }
+        }
+  ]
+};
+
 
 
     // Embed the visualization in the container with id `vis`
